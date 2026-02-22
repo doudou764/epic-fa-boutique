@@ -3,112 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPIC RP - Serveur Roleplay</title>
+<title>Boutique EPIC RP I 2K26</title>
 <link rel="stylesheet" href="style.css">
-<!-- Stripe.js pour paiement -->
-<script src="https://js.stripe.com/v3/"></script>
-</head>
-
+<script src="https://www.paypal.com/sdk/js?client-id=AQ7JAafxl-8BB7lC-ehLGhTAqs88OjIOBz_7Twtr_v8OOOsag0KuSw7k25Mscs8OKvys6GyJQlDMOuZ9&currency=EUR"></script>
+<script src="script.js"></script>
 <body>
+<div class="container">
+    <h1>BOUTIQUE OFFICIELLE – EPIC RP I 2K26</h1>
+    <p>Besoin de coins pour améliorer ton expérience RP ?<br>
+    Profite de nos offres et boost ton aventure dès maintenant !</p>
 
-<!-- LOADER ANIMÉ -->
-<div id="loader">
-    <div class="loader-logo">EPIC RP</div>
+    <div class="packs">
+        <div class="pack">
+            <h2>500 Coins</h2>
+            <p>Prix : 3,99 €</p>
+            <div id="paypal-button-500"></div>
+        </div>
+        <div class="pack">
+            <h2>1500 Coins</h2>
+            <p>Prix : 9,99 €</p>
+            <div id="paypal-button-1500"></div>
+        </div>
+        <div class="pack">
+            <h2>3000 Coins</h2>
+            <p>Prix : 18,99 €</p>
+            <div id="paypal-button-3000"></div>
+        </div>
+        <div class="pack">
+            <h2>4000 Coins (+500 OFFERTS)</h2>
+            <p>Prix : 27,99 €</p>
+            <div id="paypal-button-4000"></div>
+        </div>
+    </div>
+
+    <p>Bonus inclus sur certains packs<br>
+    Paiement sécurisé</p>
+
+    <p>Ouvre un ticket ou contacte le staff pour acheter !<br>
+    Merci de soutenir EPIC RP I 2K26</p>
 </div>
 
-<!-- PARTICLES CYBERPUNK -->
-<div id="particles-js"></div>
-
-<header>
-    <div class="logo">EPIC RP</div>
-    <nav>
-        <a href="#about">Serveur</a>
-        <a href="#shop">Boutique</a>
-        <a href="#dashboard">Compte</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
-
-<!-- HERO CINÉMATIQUE -->
-<section class="hero">
-    <h1>Bienvenue sur EPIC RP</h1>
-    <p>L'expérience Roleplay nouvelle génération</p>
-    <button onclick="scrollToShop()">Accéder à la boutique</button>
-</section>
-
-<!-- SERVEUR -->
-<section id="about" class="section">
-    <h2>Le serveur</h2>
-    <p>
-        EPIC RP est un serveur roleplay immersif avec économie réaliste,
-        métiers uniques, véhicules exclusifs et événements réguliers.
-    </p>
-
-    <div class="features">
-        <div class="card">🔥 RP immersif</div>
-        <div class="card">💎 Système économique avancé</div>
-        <div class="card">🚗 Véhicules exclusifs</div>
-        <div class="card">👑 VIP & avantages</div>
-    </div>
-</section>
-
-<!-- BOUTIQUE -->
-<section id="shop" class="section dark">
-    <h2>Boutique officielle</h2>
-    <div class="shop-grid">
-        <div class="product">
-            <h3>500 Coins</h3>
-            <p>3,99 €</p>
-            <button onclick="buyStripe('500')">Acheter</button>
-        </div>
-        <div class="product">
-            <h3>1500 Coins</h3>
-            <p>9,99 €</p>
-            <button onclick="buyStripe('1500')">Acheter</button>
-        </div>
-        <div class="product">
-            <h3>3000 Coins</h3>
-            <p>18,99 €</p>
-            <button onclick="buyStripe('3000')">Acheter</button>
-        </div>
-        <div class="product premium">
-            <h3>4000 Coins + 500 OFFERTS</h3>
-            <p>24,99 €</p>
-            <button onclick="buyStripe('4500')">Acheter</button>
-        </div>
-    </div>
-</section>
-
-<!-- DASHBOARD JOUEUR -->
-<section id="dashboard" class="section">
-    <h2>Mon Compte</h2>
-    <p>Connecte ton Discord pour gérer tes coins et ton VIP.</p>
-    <button onclick="connectDiscord()">Se connecter avec Discord</button>
-
-    <div id="user-dashboard" style="display:none;">
-        <p>Pseudo : <span id="user-name"></span></p>
-        <p>Coins : <span id="user-coins">0</span></p>
-        <p>VIP : <span id="user-vip">Non</span></p>
-        <button onclick="buyVIP()">Acheter VIP</button>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section">
-    <h2>Rejoindre la communauté</h2>
-    <p>Discord officiel EPIC RP</p>
-    <button>Rejoindre Discord</button>
-</section>
-
-<footer>
-    © 2026 EPIC RP — Tous droits réservés
-</footer>
-
-<!-- SON D'AMBIANCE -->
-<audio id="bg-music" src="assets/sound/epic-ambiance.mp3" autoplay loop></audio>
-
 <script src="script.js"></script>
-<!-- PARTICLES JS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </body>
 </html>
