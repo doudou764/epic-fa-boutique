@@ -102,8 +102,43 @@
       </table>
     </div>
 
-  </div>
+    <button class="admin-btn" onclick="openAdmin()">ADMIN PANEL</button>
 
+<div id="adminPanel" class="admin-panel">
+  <div class="admin-container">
+
+    <div class="admin-header">
+      <h2>ADMIN EPIC RP</h2>
+      <button onclick="closeAdmin()">X</button>
+    </div>
+
+    <div class="admin-stats">
+      <div class="stat">
+        <h3>Revenus</h3>
+        <p id="adminRevenue">0 €</p>
+      </div>
+
+      <div class="stat">
+        <h3>Commandes</h3>
+        <p id="adminOrders">0</p>
+      </div>
+    </div>
+
+    <div class="admin-orders">
+      <h3>Historique joueurs</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Joueur</th>
+            <th>Montant</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTable"></tbody>
+      </table>
+    </div>
+
+  </div>
 </div>
 
 <!-- ================= FOOTER ================= -->
@@ -114,3 +149,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
