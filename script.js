@@ -4,12 +4,14 @@
 
 let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
+
 /* ============================
    ANTI SPAM PAIEMENT
 ============================ */
 
 const PAYMENT_COOLDOWN = 60000; // 60 secondes
-let lastPaymentTime = localStorage.getItem("last_payment_time") || 0;
+let lastPaymentTime = parseInt(localStorage.getItem("last_payment_time")) || 0;
+
 
 /* ============================
    STATS ADMIN
@@ -40,14 +42,13 @@ function renderOrders() {
   table.innerHTML = "";
 
   orders.forEach(o => {
-    const row = `
+    table.innerHTML += `
       <tr>
         <td>${o.player}</td>
         <td>${o.amount} €</td>
         <td>${o.date}</td>
       </tr>
     `;
-    table.innerHTML += row;
   });
 }
 
@@ -56,15 +57,17 @@ function renderOrders() {
    LOGIN ADMIN SECURISE
 ============================ */
 
-const ADMIN_PASSWORD = "06_EPIC2026"; // change ton mot de passe ici
+const ADMIN_PASSWORD = "06_EPIC2026";
 
 function openAdmin() {
-  document.getElementById("adminLogin").style.display = "flex";
+  const login = document.getElementById("adminLogin");
+  if (login) login.style.display = "flex";
 }
 
 function checkLogin() {
 
-  const input = document.getElementById("adminPassword").value;
+  const input = document.getElementById("adminPassword")?.value;
+  const error = document.getElementById("loginError");
 
   if (input === ADMIN_PASSWORD) {
 
@@ -75,13 +78,13 @@ function checkLogin() {
     renderOrders();
 
   } else {
-    document.getElementById("loginError").textContent = "Mot de passe incorrect";
+    if (error) error.textContent = "Mot de passe incorrect";
   }
-
 }
 
 function closeAdmin() {
-  document.getElementById("adminPanel").style.display = "none";
+  const panel = document.getElementById("adminPanel");
+  if (panel) panel.style.display = "none";
 }
 
 
@@ -98,51 +101,61 @@ const packs = [
 
 packs.forEach(pack => {
 
+  if (!document.getElementById(pack.id)) return;
+
   paypal.Buttons({
+
+    /* ===== CREATION COMMANDE ===== */
 
     createOrder: (data, actions) => {
 
-  const now = Date.now();
+      const now = Date.now();
 
-  if (now - lastPaymentTime < PAYMENT_COOLDOWN) {
-    alert("Paiement trop rapide. Attends 1 minute.");
-    return;
-  }
+      if (now - lastPaymentTime < PAYMENT_COOLDOWN) {
+        alert("Paiement trop rapide. Attends 1 minute.");
+        return;
+      }
 
-  localStorage.setItem("last_payment_time", now);
-  lastPaymentTime = now;
+      localStorage.setItem("last_payment_time", now);
+      lastPaymentTime = now;
 
-  return actions.order.create({
-    purchase_units: [{
-      amount: { value: pack.price },
-      description: `Pack ${pack.price}€ EPIC RP`
-    }]
-  });
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: pack.price },
+          description: `Pack ${pack.price}€ EPIC RP`
+        }]
+      });
+    },
 
-},
+
+    /* ===== PAIEMENT VALIDE ===== */
 
     onApprove: (data, actions) => {
       return actions.order.capture().then(details => {
 
-        const player = details.payer.name.given_name;
-        const amount = pack.price;
-
-        alert("Paiement réussi ! Merci " + player);
+        const player =
+          details?.payer?.name?.given_name ||
+          details?.payer?.email_address ||
+          "Client";
 
         const order = {
           player: player,
-          amount: amount,
+          amount: pack.price,
           date: new Date().toLocaleString()
         };
+
+        alert("Paiement réussi ! Merci " + player);
 
         orders.push(order);
         localStorage.setItem("epic_orders", JSON.stringify(orders));
 
         updateAdminStats();
         renderOrders();
-
       });
     },
+
+
+    /* ===== ERREUR ===== */
 
     onError: err => {
       console.error(err);
@@ -162,5 +175,3 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
-
-
