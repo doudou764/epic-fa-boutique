@@ -13,16 +13,22 @@
 
 <body>
 
+<!-- ================= LOADER ================= -->
 <div id="loader">
   <div class="spinner"></div>
 </div>
 
+<!-- ================= HEADER ================= -->
 <header>
   <h1>BOUTIQUE OFFICIELLE – EPIC RP I 2K26</h1>
   <p>Besoin de coins pour améliorer ton expérience RP ?</p>
   <p class="subtitle">Profite de nos offres et boost ton aventure dès maintenant</p>
+
+  <!-- BOUTON ADMIN -->
+  <button id="openAdmin" class="admin-btn">ADMIN PANEL</button>
 </header>
 
+<!-- ================= BOUTIQUE ================= -->
 <section class="packs">
 
   <div class="card">
@@ -52,6 +58,55 @@
 
 </section>
 
+<!-- ================= ADMIN PANEL GTA RP ================= -->
+<div id="adminPanel" class="admin-panel">
+
+  <div class="admin-container">
+
+    <div class="admin-header">
+      <h2>ADMIN PANEL — GTA RP</h2>
+      <button id="closeAdmin">X</button>
+    </div>
+
+    <div class="admin-stats">
+      <div class="stat">
+        <h3>Total ventes</h3>
+        <p id="totalSales">0 €</p>
+      </div>
+
+      <div class="stat">
+        <h3>Commandes</h3>
+        <p id="totalOrders">0</p>
+      </div>
+
+      <div class="stat">
+        <h3>Utilisateurs</h3>
+        <p id="totalUsers">0</p>
+      </div>
+    </div>
+
+    <div class="admin-orders">
+      <h3>Historique paiements</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Joueur</th>
+            <th>Pack</th>
+            <th>Prix</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTable">
+          <!-- rempli en JS -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
 <footer>
   <p>Paiement sécurisé • Merci de soutenir EPIC RP I 2K26</p>
 </footer>
@@ -59,6 +114,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
