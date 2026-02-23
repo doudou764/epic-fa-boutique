@@ -2,8 +2,7 @@ const packs = [
   { id: "paypal-button-500", price: "3.99" },
   { id: "paypal-button-1500", price: "9.99" },
   { id: "paypal-button-3000", price: "18.99" },
-  { id: "paypal-button-4000", price: "27.99" }
-   { id: "paypal-button-test", price: "0,30" }
+  { id: "paypal-button-4000", price: "27.99" },
 ];
 
 packs.forEach(pack => {
@@ -37,4 +36,5 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
