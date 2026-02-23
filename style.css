@@ -36,6 +36,62 @@ header {
   transform: translateY(-8px) scale(1.03);
 }
 
+/* ================= GTA 6 ADMIN PANEL ================= */
+
+.admin-container {
+  background: linear-gradient(135deg,#020617,#000814,#020617);
+  border: 1px solid rgba(0,255,255,0.2);
+  box-shadow:
+    0 0 20px cyan,
+    inset 0 0 20px rgba(0,255,255,0.1);
+  backdrop-filter: blur(25px);
+}
+
+/* glow texte */
+.admin-header h2 {
+  color: cyan;
+  text-shadow: 0 0 10px cyan;
+}
+
+/* stats cards premium */
+.stat {
+  background: linear-gradient(145deg,#020617,#0a0f2c);
+  border: 1px solid rgba(0,255,255,0.15);
+  transition: 0.3s;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px cyan;
+}
+
+/* animation ouverture panel */
+.admin-panel {
+  animation: panelFade 0.4s ease;
+}
+
+@keyframes panelFade {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* tableau style futuriste */
+.admin-orders table {
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.admin-orders th {
+  background: rgba(0,255,255,0.15);
+  color: cyan;
+}
 .highlight {
   border: 2px solid cyan;
   box-shadow: 0 0 35px cyan;
@@ -252,3 +308,4 @@ footer {
   color: red;
   margin-top: 10px;
 }
+
