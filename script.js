@@ -43,18 +43,35 @@ function renderOrders() {
     `;
     table.innerHTML += row;
   });
-
 }
 
 
 /* ============================
-   ADMIN PANEL OPEN / CLOSE
+   LOGIN ADMIN SECURISE
 ============================ */
 
+const ADMIN_PASSWORD = "06_EPIC2026"; // change ton mot de passe ici
+
 function openAdmin() {
-  document.getElementById("adminPanel").style.display = "flex";
-  updateAdminStats();
-  renderOrders();
+  document.getElementById("adminLogin").style.display = "flex";
+}
+
+function checkLogin() {
+
+  const input = document.getElementById("adminPassword").value;
+
+  if (input === ADMIN_PASSWORD) {
+
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminPanel").style.display = "flex";
+
+    updateAdminStats();
+    renderOrders();
+
+  } else {
+    document.getElementById("loginError").textContent = "Mot de passe incorrect";
+  }
+
 }
 
 function closeAdmin() {
@@ -93,10 +110,6 @@ packs.forEach(pack => {
         const amount = pack.price;
 
         alert("Paiement réussi ! Merci " + player);
-
-        /* ============================
-           ENREGISTRER COMMANDE
-        ============================ */
 
         const order = {
           player: player,
