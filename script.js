@@ -4,6 +4,12 @@
 
 let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
+/* ============================
+   ANTI SPAM PAIEMENT
+============================ */
+
+const PAYMENT_COOLDOWN = 60000; // 60 secondes
+let lastPaymentTime = localStorage.getItem("last_payment_time") || 0;
 
 /* ============================
    STATS ADMIN
@@ -95,7 +101,24 @@ packs.forEach(pack => {
   paypal.Buttons({
 
     createOrder: (data, actions) => {
-      return actions.order.create({
+
+  const now = Date.now();
+
+  if (now - lastPaymentTime < PAYMENT_COOLDOWN) {
+    alert("Paiement trop rapide. Attends 1 minute.");
+    return;
+  }
+
+  localStorage.setItem("last_payment_time", now);
+  lastPaymentTime = now;
+
+  return actions.order.create({
+    purchase_units: [{
+      amount: { value: pack.price },
+      description: `Pack ${pack.price}€ EPIC RP`
+    }]
+  });
+},
         purchase_units: [{
           amount: { value: pack.price },
           description: `Pack ${pack.price}€ EPIC RP`
@@ -144,3 +167,4 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
