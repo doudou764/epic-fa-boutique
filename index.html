@@ -2,60 +2,60 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Boutique EPIC RP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOUTIQUE OFFICIELLE – EPIC RP I 2K26</title>
+
 <link rel="stylesheet" href="style.css">
+
+<!-- PAYPAL SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AYMDoDHENvD1AFWCBfaCd4BQLoec8bbJac1qtdxAlDobcXn9VECJEGF-k8V4Z65IFxgF5aLaPucAYJcm&currency=EUR"></script>
 </head>
 
 <body>
 
-<!-- Loader -->
 <div id="loader">
-    <div class="spinner"></div>
+  <div class="spinner"></div>
 </div>
 
-<!-- Background -->
-<div class="bg-animation"></div>
+<header>
+  <h1>BOUTIQUE OFFICIELLE – EPIC RP I 2K26</h1>
+  <p>Besoin de coins pour améliorer ton expérience RP ?</p>
+  <p class="subtitle">Profite de nos offres et boost ton aventure dès maintenant</p>
+</header>
 
-<!-- Contenu -->
-<div class="container">
+<section class="packs">
 
-    <h1 class="title">BOUTIQUE OFFICIELLE EPIC RP</h1>
-    <p class="subtitle">Boost ton expérience RP maintenant</p>
+  <div class="card">
+    <h2>500 Coins</h2>
+    <p class="price">3,99 €</p>
+    <div id="paypal-button-500"></div>
+  </div>
 
-    <div class="shop">
+  <div class="card">
+    <h2>1500 Coins</h2>
+    <p class="price">9,99 €</p>
+    <div id="paypal-button-1500"></div>
+  </div>
 
-        <div class="card">
-            <h2>500 Coins</h2>
-            <p class="price">3,99€</p>
-            <div id="paypal-button-500"></div>
-        </div>
+  <div class="card">
+    <h2>3000 Coins</h2>
+    <p class="price">18,99 €</p>
+    <div id="paypal-button-3000"></div>
+  </div>
 
-        <div class="card popular">
-            <div class="badge">POPULAIRE</div>
-            <h2>1500 Coins</h2>
-            <p class="price">9,99€</p>
-            <div id="paypal-button-1500"></div>
-        </div>
+  <div class="card highlight">
+    <h2>4000 Coins</h2>
+    <p class="bonus">+500 OFFERTS</p>
+    <p class="price">27,99 €</p>
+    <div id="paypal-button-4000"></div>
+  </div>
 
-        <div class="card">
-            <h2>3000 Coins</h2>
-            <p class="price">18,99€</p>
-            <div id="paypal-button-3000"></div>
-        </div>
+</section>
 
-        <div class="card vip">
-            <div class="badge gold">BONUS</div>
-            <h2>4000 Coins</h2>
-            <p class="price">24,99€</p>
-            <small>+500 OFFERTS</small>
-            <div id="paypal-button-4000"></div>
-        </div>
-
-    </div>
-
-</div>
+<footer>
+  <p>Paiement sécurisé • Merci de soutenir EPIC RP I 2K26</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
 </html>
-
