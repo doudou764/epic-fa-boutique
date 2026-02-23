@@ -118,13 +118,8 @@ packs.forEach(pack => {
       description: `Pack ${pack.price}€ EPIC RP`
     }]
   });
+
 },
-        purchase_units: [{
-          amount: { value: pack.price },
-          description: `Pack ${pack.price}€ EPIC RP`
-        }]
-      });
-    },
 
     onApprove: (data, actions) => {
       return actions.order.capture().then(details => {
@@ -167,4 +162,5 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
