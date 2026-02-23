@@ -9,7 +9,7 @@ let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
    ANTI SPAM PAIEMENT
 ============================ */
 
-const PAYMENT_COOLDOWN = 60000; // 60 secondes
+const PAYMENT_COOLDOWN = 60000; // 60 sec
 let lastPaymentTime = parseInt(localStorage.getItem("last_payment_time")) || 0;
 
 
@@ -19,7 +19,11 @@ let lastPaymentTime = parseInt(localStorage.getItem("last_payment_time")) || 0;
 
 function updateAdminStats() {
 
-  const totalRevenue = orders.reduce((sum, o) => sum + parseFloat(o.amount), 0);
+  const totalRevenue = orders.reduce((sum, o) => {
+    const value = parseFloat(o.amount);
+    return sum + (isNaN(value) ? 0 : value);
+  }, 0);
+
   const totalOrders = orders.length;
 
   const revenueEl = document.getElementById("adminRevenue");
@@ -42,13 +46,16 @@ function renderOrders() {
   table.innerHTML = "";
 
   orders.forEach(o => {
-    table.innerHTML += `
-      <tr>
-        <td>${o.player}</td>
-        <td>${o.amount} €</td>
-        <td>${o.date}</td>
-      </tr>
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${o.player}</td>
+      <td>${o.amount} €</td>
+      <td>${o.date}</td>
     `;
+
+    table.appendChild(row);
   });
 }
 
@@ -60,14 +67,12 @@ function renderOrders() {
 const ADMIN_PASSWORD = "06_EPIC2026";
 
 function openAdmin() {
-  const login = document.getElementById("adminLogin");
-  if (login) login.style.display = "flex";
+  document.getElementById("adminLogin").style.display = "flex";
 }
 
 function checkLogin() {
 
-  const input = document.getElementById("adminPassword")?.value;
-  const error = document.getElementById("loginError");
+  const input = document.getElementById("adminPassword").value;
 
   if (input === ADMIN_PASSWORD) {
 
@@ -78,13 +83,12 @@ function checkLogin() {
     renderOrders();
 
   } else {
-    if (error) error.textContent = "Mot de passe incorrect";
+    document.getElementById("loginError").textContent = "Mot de passe incorrect";
   }
 }
 
 function closeAdmin() {
-  const panel = document.getElementById("adminPanel");
-  if (panel) panel.style.display = "none";
+  document.getElementById("adminPanel").style.display = "none";
 }
 
 
@@ -99,25 +103,25 @@ const packs = [
   { id: "paypal-button-4000", price: "24.99" },
 ];
 
-packs.forEach(pack => {
 
-  if (!document.getElementById(pack.id)) return;
+packs.forEach(pack => {
 
   paypal.Buttons({
 
-    /* ===== CREATION COMMANDE ===== */
-
+    /* ============================
+       CREATION COMMANDE
+    ============================= */
     createOrder: (data, actions) => {
 
       const now = Date.now();
 
       if (now - lastPaymentTime < PAYMENT_COOLDOWN) {
         alert("Paiement trop rapide. Attends 1 minute.");
-        return;
+        return Promise.reject("Cooldown actif");
       }
 
-      localStorage.setItem("last_payment_time", now);
       lastPaymentTime = now;
+      localStorage.setItem("last_payment_time", now);
 
       return actions.order.create({
         purchase_units: [{
@@ -128,15 +132,17 @@ packs.forEach(pack => {
     },
 
 
-    /* ===== PAIEMENT VALIDE ===== */
-
+    /* ============================
+       PAIEMENT VALIDE
+    ============================= */
     onApprove: (data, actions) => {
+
       return actions.order.capture().then(details => {
 
         const player =
           details?.payer?.name?.given_name ||
           details?.payer?.email_address ||
-          "Client";
+          "Joueur";
 
         const order = {
           player: player,
@@ -144,10 +150,10 @@ packs.forEach(pack => {
           date: new Date().toLocaleString()
         };
 
-        alert("Paiement réussi ! Merci " + player);
-
         orders.push(order);
         localStorage.setItem("epic_orders", JSON.stringify(orders));
+
+        alert("Paiement réussi ! Merci " + player);
 
         updateAdminStats();
         renderOrders();
@@ -155,11 +161,12 @@ packs.forEach(pack => {
     },
 
 
-    /* ===== ERREUR ===== */
-
+    /* ============================
+       ERREUR PAYPAL
+    ============================= */
     onError: err => {
-      console.error(err);
-      alert("Erreur de paiement");
+      console.error("PayPal Error:", err);
+      alert("Erreur de paiement. Réessaie.");
     }
 
   }).render(`#${pack.id}`);
