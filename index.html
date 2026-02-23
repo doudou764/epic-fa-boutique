@@ -25,7 +25,7 @@
   <p class="subtitle">Profite de nos offres et boost ton aventure dès maintenant</p>
 
   <!-- BOUTON ADMIN -->
-  <button id="openAdmin" class="admin-btn">ADMIN PANEL</button>
+  <button class="admin-btn" onclick="openAdmin()">ADMIN PANEL</button>
 </header>
 
 <!-- ================= BOUTIQUE ================= -->
@@ -58,59 +58,60 @@
 
 </section>
 
-<!-- ================= ADMIN PANEL GTA RP ================= -->
-<div id="adminPanel" class="admin-panel">
+<!-- ================= ADMIN PANEL ================= -->
+<div id="adminPanel" class="admin-panel" style="display:none;">
 
   <div class="admin-container">
 
     <div class="admin-header">
-      <h2>ADMIN PANEL — GTA RP</h2>
-      <button id="closeAdmin">X</button>
+      <h2>ADMIN PANEL — EPIC RP</h2>
+      <button onclick="closeAdmin()">X</button>
     </div>
 
     <div class="admin-stats">
       <div class="stat">
-        <h3>Total ventes</h3>
-        <p id="totalSales">0 €</p>
+        <h3>Revenus</h3>
+        <p id="adminRevenue">0 €</p>
       </div>
 
       <div class="stat">
         <h3>Commandes</h3>
-        <p id="totalOrders">0</p>
-      </div>
-
-      <div class="stat">
-        <h3>Utilisateurs</h3>
-        <p id="totalUsers">0</p>
+        <p id="adminOrders">0</p>
       </div>
     </div>
 
     <div class="admin-orders">
-      <h3>Historique paiements</h3>
+      <h3>Historique joueurs</h3>
       <table>
         <thead>
           <tr>
             <th>Joueur</th>
-            <th>Pack</th>
-            <th>Prix</th>
-            <th>Status</th>
+            <th>Montant</th>
+            <th>Date</th>
           </tr>
         </thead>
-        <tbody id="ordersTable">
-          <!-- rempli en JS -->
-        </tbody>
+        <tbody id="ordersTable"></tbody>
       </table>
     </div>
 
-
+  </div>
+</div>
 
 <!-- ================= FOOTER ================= -->
 <footer>
   <p>Paiement sécurisé • Merci de soutenir EPIC RP I 2K26</p>
 </footer>
 
+<!-- ================= LOGIN ADMIN ================= -->
+<div id="adminLogin" class="admin-login">
+  <div class="login-box">
+    <h2>Connexion Admin</h2>
+    <input type="password" id="EPICRP/2K26" placeholder="00_EPICRP/2K26_00">
+    <button onclick="checkLogin()">Se connecter</button>
+    <p id="loginError"></p>
+  </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
-
-
