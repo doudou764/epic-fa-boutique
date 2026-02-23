@@ -209,3 +209,46 @@ footer {
     transform: scale(1);
   }
 }
+
+/* ================= LOGIN ADMIN ================= */
+
+.admin-login {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+}
+
+.login-box {
+  background: #020617;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px cyan;
+  text-align: center;
+}
+
+.login-box input {
+  width: 220px;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.login-box button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background: cyan;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#loginError {
+  color: red;
+  margin-top: 10px;
+}
