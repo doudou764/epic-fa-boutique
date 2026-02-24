@@ -76,8 +76,6 @@ function renderOrders() {
    LOGIN ADMIN SECURISE
 ============================ */
 
-const ADMIN_PASSWORD = "06_EPIC2026";
-
 function openAdmin() {
   document.getElementById("adminLogin").style.display = "flex";
 }
@@ -194,4 +192,5 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
