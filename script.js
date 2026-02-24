@@ -10,7 +10,7 @@ let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 ============================ */
 
 const ADMIN_ACCOUNTS = [
-  { username: "015_fonda", password: "014_ROOT2026", role: "superadmin" },
+  { username: "015_fonda", password: "014_FONDA2026", role: "superadmin" },
   { username: "06_staff", password: "05_STAFF2026", role: "admin" },
   { username: "03_modo", password: "02_MODO2026", role: "moderator" }
 ];
@@ -250,6 +250,7 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
 
 
