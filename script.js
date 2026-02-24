@@ -19,6 +19,34 @@ let currentAdmin = null;
 
 
 /* ============================
+   GESTION PERMISSIONS
+============================ */
+
+function applyPermissions() {
+
+  const role = currentAdmin.role;
+
+  const superOnly = document.querySelectorAll(".superadmin-only");
+  const adminOnly = document.querySelectorAll(".admin-only");
+
+  // cacher tout
+  superOnly.forEach(el => el.style.display = "none");
+  adminOnly.forEach(el => el.style.display = "none");
+
+  if (role === "superadmin") {
+    superOnly.forEach(el => el.style.display = "block");
+    adminOnly.forEach(el => el.style.display = "block");
+  }
+
+  if (role === "admin") {
+    adminOnly.forEach(el => el.style.display = "block");
+  }
+
+  // moderator = lecture seule
+}
+
+
+/* ============================
    ANTI SPAM PAIEMENT
 ============================ */
 
@@ -199,6 +227,7 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
 
 
