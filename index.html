@@ -85,12 +85,16 @@
 
   <h3>Actions Admin</h3>
 
-  <button class="admin-only">Ajouter coins joueur</button>
+  <button class="admin-only" onclick="giveCoins()">
+    Donner coins
+  </button>
 
-  <button class="superadmin-only">Supprimer commande</button>
+  <button class="superadmin-only" onclick="editShopPrices()">
+    Modifier prix boutique
+  </button>
 
   <button class="superadmin-only" onclick="refundPayment()">
-    Rembourser paiement
+    Remboursement
   </button>
 
 </div>
@@ -133,6 +137,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
