@@ -82,19 +82,30 @@ function openAdmin() {
 
 function checkLogin() {
 
-  const input = document.getElementById("adminPassword").value;
+  const username = document.getElementById("adminUser").value;
+  const password = document.getElementById("adminPassword").value;
 
-  if (input === ADMIN_PASSWORD) {
+  const account = ADMIN_ACCOUNTS.find(a =>
+    a.username === username && a.password === password
+  );
 
-    document.getElementById("adminLogin").style.display = "none";
-    document.getElementById("adminPanel").style.display = "flex";
-
-    updateAdminStats();
-    renderOrders();
-
-  } else {
-    document.getElementById("loginError").textContent = "Mot de passe incorrect";
+  if (!account) {
+    document.getElementById("loginError").textContent = "Identifiants invalides";
+    return;
   }
+
+  currentAdmin = account;
+
+  document.getElementById("adminLogin").style.display = "none";
+  document.getElementById("adminPanel").style.display = "flex";
+
+  applyPermissions();
+  updateAdminStats();
+  renderOrders();
+}
+
+function closeAdmin() {
+  document.getElementById("adminPanel").style.display = "none";
 }
 
 function closeAdmin() {
@@ -192,5 +203,6 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
 
