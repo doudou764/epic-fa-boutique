@@ -6,12 +6,24 @@ let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
 
 /* ============================
+   COMPTES ADMIN + ROLES
+============================ */
+
+const ADMIN_ACCOUNTS = [
+  { username: "015_fonda", password: "014_ROOT2026", role: "superadmin" },
+  { username: "06_staff", password: "05_STAFF2026", role: "admin" },
+  { username: "03_modo", password: "02_MODO2026", role: "moderator" }
+];
+
+let currentAdmin = null;
+
+
+/* ============================
    ANTI SPAM PAIEMENT
 ============================ */
 
-const PAYMENT_COOLDOWN = 60000; // 60 sec
+const PAYMENT_COOLDOWN = 60000;
 let lastPaymentTime = parseInt(localStorage.getItem("last_payment_time")) || 0;
-
 
 /* ============================
    STATS ADMIN
@@ -182,3 +194,4 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
