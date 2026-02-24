@@ -108,10 +108,6 @@ function closeAdmin() {
   document.getElementById("adminPanel").style.display = "none";
 }
 
-function closeAdmin() {
-  document.getElementById("adminPanel").style.display = "none";
-}
-
 
 /* ============================
    PAYPAL PACKS
@@ -203,6 +199,7 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
 
 
