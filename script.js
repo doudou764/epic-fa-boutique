@@ -24,6 +24,29 @@ let currentAdmin = null;
 
 function applyPermissions() {
 
+   /* ============================
+   SECURITE SUPERADMIN
+============================ */
+
+function requireSuperAdmin() {
+  if (!currentAdmin || currentAdmin.role !== "superadmin") {
+    alert("Accès refusé : Super Admin requis");
+    return false;
+  }
+  return true;
+}
+
+/* ============================
+   ACTION REMBOURSEMENT
+============================ */
+
+function refundPayment() {
+
+  if (!requireSuperAdmin()) return;
+
+  alert("Remboursement effectué");
+}
+   
   const role = currentAdmin.role;
 
   const superOnly = document.querySelectorAll(".superadmin-only");
@@ -227,6 +250,7 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
 
 
