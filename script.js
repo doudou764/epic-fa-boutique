@@ -187,15 +187,6 @@ packs.forEach(pack => {
   }).render(`#${pack.id}`);
 });
 
-/* ============================
-   VIP ACHETER FONCTION
-============================ */
-
-function acheter(vip, prix) {
-    alert("Tu as choisi " + vip + " pour " + prix + " €");
-    console.log("Achat sélectionné :", vip, prix);
-
-    // Ici tu peux ajouter le lien Stripe ou PayPal pour le paiement réel
 }
 
 /* ============================
@@ -206,3 +197,4 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
