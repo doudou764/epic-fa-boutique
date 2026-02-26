@@ -4,6 +4,7 @@
 
 let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
+
 /* ============================
    COMPTES ADMIN + ROLES
 ============================ */
@@ -15,6 +16,7 @@ const ADMIN_ACCOUNTS = [
 ];
 
 let currentAdmin = null;
+
 
 /* ============================
    GESTION PERMISSIONS
@@ -39,7 +41,9 @@ function requireSuperAdmin() {
 ============================ */
 
 function refundPayment() {
+
   if (!requireSuperAdmin()) return;
+
   alert("Remboursement effectué");
 }
    
@@ -48,6 +52,7 @@ function refundPayment() {
   const superOnly = document.querySelectorAll(".superadmin-only");
   const adminOnly = document.querySelectorAll(".admin-only");
 
+  // cacher tout
   superOnly.forEach(el => el.style.display = "none");
   adminOnly.forEach(el => el.style.display = "none");
 
@@ -59,7 +64,10 @@ function refundPayment() {
   if (role === "admin") {
     adminOnly.forEach(el => el.style.display = "block");
   }
+
+  // moderator = lecture seule
 }
+
 
 /* ============================
    ANTI SPAM PAIEMENT
@@ -73,6 +81,7 @@ let lastPaymentTime = parseInt(localStorage.getItem("last_payment_time")) || 0;
 ============================ */
 
 function updateAdminStats() {
+
   const totalRevenue = orders.reduce((sum, o) => {
     const value = parseFloat(o.amount);
     return sum + (isNaN(value) ? 0 : value);
@@ -87,25 +96,32 @@ function updateAdminStats() {
   if (ordersEl) ordersEl.textContent = totalOrders;
 }
 
+
 /* ============================
    TABLE HISTORIQUE
 ============================ */
 
 function renderOrders() {
+
   const table = document.getElementById("ordersTable");
   if (!table) return;
 
   table.innerHTML = "";
+
   orders.forEach(o => {
+
     const row = document.createElement("tr");
+
     row.innerHTML = `
       <td>${o.player}</td>
       <td>${o.amount} €</td>
       <td>${o.date}</td>
     `;
+
     table.appendChild(row);
   });
 }
+
 
 /* ============================
    LOGIN ADMIN SECURISE
@@ -116,10 +132,13 @@ function openAdmin() {
 }
 
 function checkLogin() {
+
   const username = document.getElementById("adminUser").value;
   const password = document.getElementById("adminPassword").value;
 
-  const account = ADMIN_ACCOUNTS.find(a => a.username === username && a.password === password);
+  const account = ADMIN_ACCOUNTS.find(a =>
+    a.username === username && a.password === password
+  );
 
   if (!account) {
     document.getElementById("loginError").textContent = "Identifiants invalides";
@@ -140,6 +159,7 @@ function closeAdmin() {
   document.getElementById("adminPanel").style.display = "none";
 }
 
+
 /* ============================
    PAYPAL PACKS
 ============================ */
@@ -151,14 +171,23 @@ const packs = [
   { id: "paypal-button-4000", price: "24.99" },
 ];
 
+
 packs.forEach(pack => {
+
   paypal.Buttons({
+
+    /* ============================
+       CREATION COMMANDE
+    ============================= */
     createOrder: (data, actions) => {
+
       const now = Date.now();
+
       if (now - lastPaymentTime < PAYMENT_COOLDOWN) {
         alert("Paiement trop rapide. Attends 1 minute.");
         return Promise.reject("Cooldown actif");
       }
+
       lastPaymentTime = now;
       localStorage.setItem("last_payment_time", now);
 
@@ -169,25 +198,49 @@ packs.forEach(pack => {
         }]
       });
     },
+
+
+    /* ============================
+       PAIEMENT VALIDE
+    ============================= */
     onApprove: (data, actions) => {
+
       return actions.order.capture().then(details => {
-        const player = details?.payer?.name?.given_name || details?.payer?.email_address || "Joueur";
-        const order = { player: player, amount: pack.price, date: new Date().toLocaleString() };
+
+        const player =
+          details?.payer?.name?.given_name ||
+          details?.payer?.email_address ||
+          "Joueur";
+
+        const order = {
+          player: player,
+          amount: pack.price,
+          date: new Date().toLocaleString()
+        };
+
         orders.push(order);
         localStorage.setItem("epic_orders", JSON.stringify(orders));
+
         alert("Paiement réussi ! Merci " + player);
+
         updateAdminStats();
         renderOrders();
       });
     },
+
+
+    /* ============================
+       ERREUR PAYPAL
+    ============================= */
     onError: err => {
       console.error("PayPal Error:", err);
       alert("Erreur de paiement. Réessaie.");
     }
+
   }).render(`#${pack.id}`);
+
 });
 
-}
 
 /* ============================
    LOADER
@@ -197,4 +250,5 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
