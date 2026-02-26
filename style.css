@@ -308,20 +308,3 @@ footer {
   color: red;
   margin-top: 10px;
 }
-
-/* ================= VIP CARDS ================= */
-.bronze { border: 2px solid #cd7f32; }
-.argent { border: 2px solid #c0c0c0; }
-.gold { border: 2px solid #ffd700; }
-
-.card button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background-color: #3b82f6;
-    color: white;
-    cursor: pointer;
-}
-.card button:hover {
-    background-color: #2563eb;
-}
