@@ -100,37 +100,6 @@ products.forEach(p => {
   }).render(`#paypal-button-${p.id}`);
 });
 
-// ================= CONNEXION DISCORD =================
-function discordLogin() {
-  const clientId = "TON_CLIENT_ID_DISCORD";
-  const redirectUri = encodeURIComponent(window.location.href);
-  const scope = encodeURIComponent("identify");
-  window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
-}
-
-const urlParams = new URLSearchParams(window.location.search);
-const code = urlParams.get('code');
-if(code){
-  fetch('http://localhost:3000/api/discord-login',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({code})
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    console.log('Discord connecté :',data.discordId);
-    window.localStorage.setItem('discordId',data.discordId);
-  });
-}
-
-// ================= BOUTONS ACHAT (Fallback) =================
-document.querySelectorAll('.buy').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const productId = btn.dataset.id;
-    alert(`Produit ${productId} sélectionné. Paiement via PayPal ci-dessus.`);
-  });
-});
-
 /* ============================
    COMPTES ADMIN + ROLES
 ============================ */
@@ -376,6 +345,7 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
+
 
 
 
