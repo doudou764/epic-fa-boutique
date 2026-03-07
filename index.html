@@ -3,69 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOUTIQUE OFFICIELLE – EPIC RP I 2K26</title>
+<title>EPIC FA | ANARCHIE - Boutique</title>
 
+<!-- CSS -->
 <link rel="stylesheet" href="style.css">
 
-<!-- PAYPAL SDK -->
+<!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AYMDoDHENvD1AFWCBfaCd4BQLoec8bbJac1qtdxAlDobcXn9VECJEGF-k8V4Z65IFxgF5aLaPucAYJcm&currency=EUR"></script>
 </head>
-
 <body>
 
-<!-- ================= LOADER ================= -->
-<div id="loader">
-  <div class="spinner"></div>
-</div>
+<!-- LOADER -->
+<div id="loader"><div class="spinner"></div></div>
 
-<!-- ================= HEADER ================= -->
+<!-- HEADER -->
 <header>
-  <h1>BOUTIQUE OFFICIELLE – EPIC RP I 2K26</h1>
-  <p>Besoin de coins pour améliorer ton expérience RP ?</p>
-  <p class="subtitle">Profite de nos offres et boost ton aventure dès maintenant</p>
-
-  <!-- BOUTON ADMIN -->
+  <h1>EPIC FA | ANARCHIE - Boutique</h1>
+  <p>Soutiens le serveur et améliore ton expérience RP !</p>
+  <button onclick="discordLogin()" class="discord-login">Connexion Discord</button>
   <button class="admin-btn" onclick="openAdmin()">ADMIN PANEL</button>
 </header>
 
-<!-- ================= BOUTIQUE ================= -->
+<!-- BOUTIQUE -->
 <section class="packs">
-
-  <div class="card">
-    <h2>500 Coins</h2>
-    <p class="price">3,99 €</p>
-    <div id="paypal-button-500"></div>
-  </div>
-
-  <div class="card">
-    <h2>1500 Coins</h2>
-    <p class="price">9,99 €</p>
-    <div id="paypal-button-1500"></div>
-  </div>
-
-  <div class="card">
-    <h2>3000 Coins</h2>
-    <p class="price">17,99 €</p>
-    <div id="paypal-button-3000"></div>
-  </div>
-
-  <div class="card highlight">
-    <p class= Pack MEGA DEAL !</p>
-    <h2>4000 Coins</h2>
-    <p class="bonus">+500 OFFERTS</p>
-    <p class="price">24,99 €</p>
-    <div id="paypal-button-4000"></div>
-  </div>
-
+  <!-- Les cartes seront générées dynamiquement par script.js -->
 </section>
 
-<!-- ================= ADMIN PANEL ================= -->
+<!-- ADMIN PANEL -->
 <div id="adminPanel" class="admin-panel" style="display:none;">
-
   <div class="admin-container">
-
     <div class="admin-header">
-      <h2>ADMIN PANEL — EPIC RP</h2>
+      <h2>ADMIN PANEL — EPIC FA</h2>
       <button onclick="closeAdmin()">X</button>
     </div>
 
@@ -74,33 +42,20 @@
         <h3>Revenus</h3>
         <p id="adminRevenue">0 €</p>
       </div>
-
       <div class="stat">
         <h3>Commandes</h3>
         <p id="adminOrders">0</p>
       </div>
     </div>
 
- <!-- ACTIONS ADMIN SELON ROLE -->
-<div class="admin-actions">
+    <div class="admin-actions">
+      <h3>Actions Admin</h3>
+      <button class="admin-only" onclick="giveCoins()">Donner coins</button>
+      <button class="superadmin-only" onclick="editShopPrices()">Modifier prix boutique</button>
+      <button class="superadmin-only" onclick="refundPayment()">Remboursement</button>
+    </div>
 
-  <h3>Actions Admin</h3>
-
-  <button class="admin-only" onclick="giveCoins()">
-    Donner coins
-  </button>
-
-  <button class="superadmin-only" onclick="editShopPrices()">
-    Modifier prix boutique
-  </button>
-
-  <button class="superadmin-only" onclick="refundPayment()">
-    Remboursement
-  </button>
-
-</div>
-
-<div class="admin-orders">
+    <div class="admin-orders">
       <h3>Historique joueurs</h3>
       <table>
         <thead>
@@ -113,29 +68,26 @@
         <tbody id="ordersTable"></tbody>
       </table>
     </div>
-
   </div>
 </div>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-  <p>Paiement sécurisé • Merci de soutenir EPIC RP I 2K26</p>
-</footer>
-
-<!-- ================= LOGIN ADMIN ================= -->
+<!-- LOGIN ADMIN -->
 <div id="adminLogin" class="admin-login">
   <div class="login-box">
     <h2>Connexion Admin</h2>
-
     <input id="adminUser" placeholder="Username" autocomplete="off">
     <input type="password" id="adminPassword" placeholder="Mot de passe" autocomplete="off">
-
     <button onclick="checkLogin()">Se connecter</button>
     <p id="loginError"></p>
   </div>
 </div>
 
+<!-- FOOTER -->
+<footer>
+  <p>Paiement sécurisé • Merci de soutenir EPIC FA | ANARCHIE</p>
+</footer>
+
+<!-- SCRIPT -->
 <script src="script.js"></script>
 </body>
 </html>
-
