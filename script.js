@@ -42,47 +42,37 @@ const products = [
   {id:9,name:"Mythic Pack",coins:12000,role:"Mythic",price:69.99},
   {id:10,name:"Titan Pack",coins:15000,role:"Titan",price:79.99},
 
-  {id:11,name:"Coins 500",coins:500,role:"Supporter",price:3.99},
-  {id:12,name:"Coins 1000",coins:1000,role:"Donateur",price:7.99},
-  {id:13,name:"Coins 1500",coins:1500,role:"Donateur+",price:9.99},
-  {id:14,name:"Coins 2000",coins:2000,role:"Premium",price:12.99},
-  {id:15,name:"Coins 3000",coins:3000,role:"Premium",price:18.99},
-  {id:16,name:"Coins 4000",coins:4000,role:"VIP",price:24.99},
-  {id:17,name:"Coins 5000",coins:5000,role:"VIP+",price:29.99},
-  {id:18,name:"Coins 7500",coins:7500,role:"Elite",price:44.99},
-  {id:19,name:"Coins 10000",coins:10000,role:"Diamond",price:59.99},
+  {id:11,name:"Grade Supporter",coins:500,role:"Supporter",price:4.99},
+  {id:12,name:"Grade Donateur",coins:1000,role:"Donateur",price:9.99},
+  {id:13,name:"Grade Donateur+",coins:1500,role:"Donateur+",price:14.99},
+  {id:14,name:"Grade Premium",coins:2500,role:"Premium",price:19.99},
+  {id:15,name:"Grade VIP",coins:5000,role:"VIP",price:29.99},
+  {id:16,name:"Grade VIP+",coins:6000,role:"VIP+",price:39.99},
+  {id:17,name:"Grade Elite",coins:8000,role:"Elite",price:49.99},
+  {id:18,name:"Grade Elite+",coins:10000,role:"Elite+",price:59.99},
+  {id:19,name:"Grade Diamond",coins:12000,role:"Diamond",price:69.99},
+  {id:20,name:"Grade Diamond+",coins:15000,role:"Diamond+",price:79.99},
+  {id:21,name:"Grade Mythic",coins:18000,role:"Mythic",price:89.99},
+  {id:22,name:"Grade Mythic+",coins:20000,role:"Mythic+",price:99.99},
+  {id:23,name:"Grade Titan",coins:22000,role:"Titan",price:109.99},
+  {id:24,name:"Grade Titan+",coins:25000,role:"Titan+",price:119.99},
+  {id:25,name:"Grade Empire",coins:28000,role:"Empire",price:129.99},
+  {id:26,name:"Grade Empire+",coins:30000,role:"Empire+",price:139.99},
+  {id:27,name:"Grade Légende",coins:35000,role:"Légende",price:149.99},
+  {id:28,name:"Grade Légende+",coins:40000,role:"Légende+",price:159.99},
 
-  {id:20,name:"Grade Supporter",coins:500,role:"Supporter",price:4.99},
-  {id:21,name:"Grade Donateur",coins:1000,role:"Donateur",price:9.99},
-  {id:22,name:"Grade Donateur+",coins:1500,role:"Donateur+",price:14.99},
-  {id:23,name:"Grade Premium",coins:2500,role:"Premium",price:19.99},
-  {id:24,name:"Grade VIP",coins:5000,role:"VIP",price:29.99},
-  {id:25,name:"Grade VIP+",coins:6000,role:"VIP+",price:39.99},
-  {id:26,name:"Grade Elite",coins:8000,role:"Elite",price:49.99},
-  {id:27,name:"Grade Elite+",coins:10000,role:"Elite+",price:59.99},
-  {id:28,name:"Grade Diamond",coins:12000,role:"Diamond",price:69.99},
-  {id:29,name:"Grade Diamond+",coins:15000,role:"Diamond+",price:79.99},
-  {id:30,name:"Grade Mythic",coins:18000,role:"Mythic",price:89.99},
-  {id:31,name:"Grade Mythic+",coins:20000,role:"Mythic+",price:99.99},
-  {id:32,name:"Grade Titan",coins:22000,role:"Titan",price:109.99},
-  {id:33,name:"Grade Titan+",coins:25000,role:"Titan+",price:119.99},
-  {id:34,name:"Grade Empire",coins:28000,role:"Empire",price:129.99},
-  {id:35,name:"Grade Empire+",coins:30000,role:"Empire+",price:139.99},
-  {id:36,name:"Grade Légende",coins:35000,role:"Légende",price:149.99},
-  {id:37,name:"Grade Légende+",coins:40000,role:"Légende+",price:159.99},
+  {id:29,name:"Pack Event Bronze",coins:500,role:"Supporter",price:4.99},
+  {id:30,name:"Pack Event Silver",coins:1000,role:"Donateur",price:9.99},
+  {id:31,name:"Pack Event Gold",coins:2500,role:"Premium",price:19.99},
+  {id:32,name:"Pack Event Diamond",coins:6000,role:"Diamond",price:39.99},
+  {id:33,name:"Ticket tournoi",coins:0,role:"Donateur",price:14.99},
 
-  {id:38,name:"Pack Event Bronze",coins:500,role:"Supporter",price:4.99},
-  {id:39,name:"Pack Event Silver",coins:1000,role:"Donateur",price:9.99},
-  {id:40,name:"Pack Event Gold",coins:2500,role:"Premium",price:19.99},
-  {id:41,name:"Pack Event Diamond",coins:6000,role:"Diamond",price:39.99},
-  {id:42,name:"Ticket tournoi",coins:0,role:"Donateur",price:14.99},
-
-  {id:43,name:"Soutien 2€",coins:100,role:"Supporter",price:2},
-  {id:44,name:"Soutien 5€",coins:300,role:"Donateur",price:5},
-  {id:45,name:"Soutien 10€",coins:800,role:"Premium",price:10},
-  {id:46,name:"Soutien 25€",coins:2000,role:"VIP",price:25},
-  {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
-  {id:47,name:"UNBAN",coins:5000,role:"UNBAN",price:15}
+  {id:34,name:"Soutien 2€",coins:100,role:"Supporter",price:2},
+  {id:35,name:"Soutien 5€",coins:300,role:"Donateur",price:5},
+  {id:36,name:"Soutien 10€",coins:800,role:"Premium",price:10},
+  {id:37,name:"Soutien 25€",coins:2000,role:"VIP",price:25},
+  {id:38,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
+  {id:39,name:"UNBAN",coins:5000,role:"UNBAN",price:15}
 ];
 
 /* =========================
@@ -171,6 +161,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
