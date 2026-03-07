@@ -4,36 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPIC FA | ANARCHIE - Boutique</title>
-
-<!-- CSS -->
 <link rel="stylesheet" href="style.css">
 
-<!-- PayPal SDK -->
+<!-- PAYPAL SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AYMDoDHENvD1AFWCBfaCd4BQLoec8bbJac1qtdxAlDobcXn9VECJEGF-k8V4Z65IFxgF5aLaPucAYJcm&currency=EUR"></script>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader"><div class="spinner"></div></div>
+<!-- ================= LOADER ================= -->
+<div id="loader">
+  <div class="spinner"></div>
+</div>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 <header>
   <h1>EPIC FA | ANARCHIE - Boutique</h1>
-  <p>Soutiens le serveur et améliore ton expérience RP !</p>
-  <button onclick="discordLogin()" class="discord-login">Connexion Discord</button>
+  <p>Besoin de coins pour améliorer ton expérience RP ?</p>
+  <p class="subtitle">Profite de nos offres et boost ton aventure dès maintenant</p>
+  <button class="discord-login" onclick="discordLogin()">Connexion Discord</button>
   <button class="admin-btn" onclick="openAdmin()">ADMIN PANEL</button>
 </header>
 
-<!-- BOUTIQUE -->
+<!-- ================= BOUTIQUE ================= -->
 <section class="packs">
-  <!-- Les cartes seront générées dynamiquement par script.js -->
+  <!-- Les cartes produits seront générées dynamiquement par script.js -->
 </section>
 
-<!-- ADMIN PANEL -->
-<div id="adminPanel" class="admin-panel" style="display:none;">
+<!-- ================= ADMIN PANEL ================= -->
+<div id="adminPanel" class="admin-panel">
   <div class="admin-container">
     <div class="admin-header">
-      <h2>ADMIN PANEL — EPIC FA</h2>
+      <h2>ADMIN PANEL — EPIC FA | ANARCHIE</h2>
       <button onclick="closeAdmin()">X</button>
     </div>
 
@@ -71,7 +72,7 @@
   </div>
 </div>
 
-<!-- LOGIN ADMIN -->
+<!-- ================= LOGIN ADMIN ================= -->
 <div id="adminLogin" class="admin-login">
   <div class="login-box">
     <h2>Connexion Admin</h2>
@@ -82,12 +83,11 @@
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer>
   <p>Paiement sécurisé • Merci de soutenir EPIC FA | ANARCHIE</p>
 </footer>
 
-<!-- SCRIPT -->
 <script src="script.js"></script>
 </body>
 </html>
