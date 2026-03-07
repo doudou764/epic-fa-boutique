@@ -1,120 +1,19 @@
-body {
+/* ============================== RESET & BASE ============================= */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
   background: linear-gradient(120deg,#0f172a,#020617);
   color: white;
+  min-height: 100vh;
   text-align: center;
 }
 
-header {
-  padding: 40px 20px;
-}
-
-.subtitle {
-  opacity: 0.8;
-}
-
-.packs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  padding: 30px;
-}
-
-.card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 25px;
-  width: 250px;
-  box-shadow: 0 0 25px rgba(0,255,255,0.15);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-8px) scale(1.03);
-}
-
-/* ================= GTA 6 ADMIN PANEL ================= */
-
-.admin-container {
-  background: linear-gradient(135deg,#020617,#000814,#020617);
-  border: 1px solid rgba(0,255,255,0.2);
-  box-shadow:
-    0 0 20px cyan,
-    inset 0 0 20px rgba(0,255,255,0.1);
-  backdrop-filter: blur(25px);
-}
-
-/* glow texte */
-.admin-header h2 {
-  color: cyan;
-  text-shadow: 0 0 10px cyan;
-}
-
-/* stats cards premium */
-.stat {
-  background: linear-gradient(145deg,#020617,#0a0f2c);
-  border: 1px solid rgba(0,255,255,0.15);
-  transition: 0.3s;
-}
-
-.stat:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px cyan;
-}
-
-/* animation ouverture panel */
-.admin-panel {
-  animation: panelFade 0.4s ease;
-}
-
-@keyframes panelFade {
-  from {
-    opacity: 0;
-    transform: scale(0.8) translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* tableau style futuriste */
-.admin-orders table {
-  background: rgba(0,0,0,0.4);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.admin-orders th {
-  background: rgba(0,255,255,0.15);
-  color: cyan;
-}
-.highlight {
-  border: 2px solid cyan;
-  box-shadow: 0 0 35px cyan;
-}
-
-.price {
-  font-size: 26px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.bonus {
-  color: cyan;
-  font-weight: bold;
-}
-
-footer {
-  margin-top: 40px;
-  padding: 20px;
-  opacity: 0.7;
-}
-
-/* Loader */
+/* ============================== LOADER ============================= */
 #loader {
   position: fixed;
   inset: 0;
@@ -134,45 +33,71 @@ footer {
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================== HEADER ============================= */
+header {
+  padding: 40px 20px;
 }
 
-/* ================= ADMIN BUTTON ================= */
-.admin-btn {
-  margin-top: 20px;
+header h1 { font-size: 2.5rem; color: cyan; text-shadow: 0 0 10px cyan; }
+.subtitle { opacity: 0.8; margin-bottom: 20px; }
+
+.discord-login, .admin-btn {
   padding: 10px 20px;
-  background: linear-gradient(45deg, cyan, #00f0ff);
+  margin: 5px;
   border: none;
   border-radius: 8px;
-  color: black;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.admin-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px cyan;
+.discord-login { background: cyan; color: black; }
+.discord-login:hover, .admin-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px cyan; }
+
+.admin-btn { background: linear-gradient(45deg, cyan, #00f0ff); color: black; }
+
+/* ============================== BOUTIQUE CARDS ============================= */
+.packs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 30px;
 }
 
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 25px;
+  width: 250px;
+  box-shadow: 0 0 25px rgba(0,255,255,0.15);
+  transition: 0.3s;
+}
 
-/* ================= ADMIN PANEL OVERLAY ================= */
+.card:hover { transform: translateY(-8px) scale(1.03); }
+
+.card h2 { color: cyan; margin-bottom: 10px; }
+.card p { margin-bottom: 10px; }
+.card .price { font-size: 26px; font-weight: bold; margin: 10px 0; color: cyan; }
+.card .bonus { color: cyan; font-weight: bold; }
+.card button.buy {
+  padding:10px 15px; border:none; border-radius:5px; background: cyan; color:black; font-weight:bold; cursor:pointer;
+}
+.card button.buy:hover { background:#00f0ff; }
+
+/* ============================== ADMIN PANEL ============================= */
 .admin-panel {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: rgba(0,0,0,0.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
+  display: none; align-items: center; justify-content: center;
   z-index: 10000;
 }
 
-
-/* ================= ADMIN CONTAINER ================= */
 .admin-container {
-  width: 90%;
-  max-width: 1100px;
+  width: 90%; max-width: 1100px;
   background: #020617;
   border-radius: 14px;
   box-shadow: 0 0 40px cyan;
@@ -180,131 +105,30 @@ footer {
   animation: fadeIn 0.4s ease;
 }
 
+.admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+.admin-header h2 { margin: 0; color: cyan; text-shadow:0 0 10px cyan; }
+.admin-header button { background: red; border:none; color:white; font-size:18px; padding:5px 12px; border-radius:6px; cursor:pointer; }
 
-/* ================= HEADER ================= */
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 10px;
-}
+.admin-stats { display:flex; gap:20px; margin-top:20px; }
+.stat { flex:1; background: rgba(255,255,255,0.05); border-radius:10px; padding:15px; box-shadow:0 0 15px rgba(0,255,255,0.2); transition:0.3s; }
+.stat:hover { transform: translateY(-5px); box-shadow:0 0 20px cyan; }
+.stat h3 { margin:0; opacity:0.7; } 
+.stat p { font-size:26px; font-weight:bold; margin:5px 0 0 0; }
 
-.admin-header h2 {
-  margin: 0;
-}
-
-.admin-header button {
-  background: red;
-  border: none;
-  color: white;
-  font-size: 18px;
-  padding: 5px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-
-/* ================= STATS ================= */
-.admin-stats {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.stat {
-  flex: 1;
-  background: rgba(255,255,255,0.05);
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 0 15px rgba(0,255,255,0.2);
-}
-
-.stat h3 {
-  margin: 0;
-  opacity: 0.7;
-}
-
-.stat p {
-  font-size: 26px;
-  font-weight: bold;
-  margin: 5px 0 0 0;
-}
-
-
-/* ================= TABLE ================= */
-.admin-orders {
-  margin-top: 30px;
-}
-
-.admin-orders table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.admin-orders th,
-.admin-orders td {
-  padding: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.admin-orders th {
-  background: rgba(0,255,255,0.1);
-}
-
+/* Table historique commandes */
+.admin-orders { margin-top:30px; }
+.admin-orders table { width:100%; border-collapse: collapse; margin-top:10px; }
+.admin-orders th, .admin-orders td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.admin-orders th { background: rgba(0,255,255,0.1); color:cyan; }
 
 /* ================= ANIMATION ================= */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+@keyframes fadeIn { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: scale(1); } }
 
 /* ================= LOGIN ADMIN ================= */
+.admin-login { position: fixed; inset:0; background: rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:11000; }
+.login-box { background:#020617; padding:40px; border-radius:15px; box-shadow:0 0 30px cyan; text-align:center; }
+.login-box input { width:220px; padding:10px; margin-top:15px; border-radius:8px; border:none; outline:none; }
+.login-box button { margin-top:15px; padding:10px 20px; border:none; background:cyan; border-radius:8px; cursor:pointer; }
+#loginError { color:red; margin-top:10px; }
 
-.admin-login {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 11000;
-}
-
-.login-box {
-  background: #020617;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 0 30px cyan;
-  text-align: center;
-}
-
-.login-box input {
-  width: 220px;
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-}
-
-.login-box button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  background: cyan;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-#loginError {
-  color: red;
-  margin-top: 10px;
-}
+footer { margin-top:40px; padding:20px; opacity:0.7; }
