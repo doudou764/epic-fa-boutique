@@ -96,22 +96,6 @@ const products = [
   {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
 ];
 
-// ================= AFFICHAGE DYNAMIQUE =================
-const container = document.querySelector('.packs-container');
-container.innerHTML = '';
-products.forEach(p => {
-  const div = document.createElement('div');
-  div.classList.add('card', 'product');
-  div.innerHTML = `
-    <h2>${p.name}</h2>
-    <p>${p.coins} Coins + Rôle ${p.role}</p>
-    <p class="price">${p.price.toFixed(2)} €</p>
-    <div id="paypal-button-${p.id}"></div>
-    <button class="buy" data-id="${p.id}">Acheter</button>
-  `;
-  container.appendChild(div);
-});
-
 // ================= PAYPAL =================
 products.forEach(p => {
   paypal.Buttons({
@@ -304,6 +288,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
