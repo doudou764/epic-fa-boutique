@@ -76,8 +76,7 @@ const products = [
   {id:44,name:"Soutien 5€",coins:300,role:"Donateur",price:5},
   {id:45,name:"Soutien 10€",coins:800,role:"Premium",price:10},
   {id:46,name:"Soutien 25€",coins:2000,role:"VIP",price:25},
-  {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50},
-  {id:47,name:"Unban",coins:0,role:"Unban",price:15}
+  {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
 ];
 
 
@@ -163,4 +162,5 @@ window.addEventListener("load",()=>document.getElementById("loader").style.displ
 
 /* ===================== SCROLL PACKS ===================== */
 function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
+
 
