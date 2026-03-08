@@ -3,64 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPIC FA | ANARCHIE - Boutique</title>
+<title>EPIC RP - Boutique Officielle</title>
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- CSS -->
 <link rel="stylesheet" href="style.css">
+
 <!-- PayPal SDK -->
-<script src="https://www.paypal.com/sdk/js?client-id=AQ4y8L_AnxEHhCeKLGHE2b6vjZeYodp_E3pVvPM68IeP2k-RE4ICt_BVEtr2owIEgSOz5QMkPpSsxdVn&currency=EUR"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR" defer></script>
+
 </head>
 <body>
 
 <!-- Loader -->
 <div id="loader"><div class="spinner"></div></div>
 
-<!-- Header -->
-<header>
-  <h1>EPIC FA | ANARCHIE - Boutique</h1>
-  <p>Soutiens le serveur!</p>
-  <p class="subtitle">Profite de nos offres et boost ton aventure dès maintenant</p>
-  <p class="subtitle">Faites un ticket sur le Discord pour tout achat effectué</p>
-  <button class="admin-btn" onclick="openAdmin()">ADMIN PANEL</button>
+<!-- Header / Hero -->
+<header class="hero">
+  <h1>EPIC RP | Boutique Officielle</h1>
+  <p>Boost ton expérience RP avec nos packs coins !</p>
+  <button class="btn" onclick="scrollToPacks()">Voir les Packs</button>
 </header>
 
 <!-- Boutique Packs -->
-<section class="packs">
-  <div class="packs-container"></div>
-</section>
+<section id="packs" class="packs-container"></section>
 
 <!-- Admin Panel -->
 <div id="adminPanel" class="admin-panel" style="display:none;">
   <div class="admin-container">
     <div class="admin-header">
-      <h2>ADMIN PANEL — EPIC FA</h2>
+      <h2>Admin Panel — EPIC RP</h2>
       <button onclick="closeAdmin()">X</button>
     </div>
     <div class="admin-stats">
-      <div class="stat">
-        <h3>Revenus</h3>
-        <p id="adminRevenue">0 €</p>
-      </div>
-      <div class="stat">
-        <h3>Commandes</h3>
-        <p id="adminOrders">0</p>
-      </div>
+      <div class="stat"><h3>Revenus</h3><p id="adminRevenue">0 €</p></div>
+      <div class="stat"><h3>Commandes</h3><p id="adminOrders">0</p></div>
     </div>
-
     <div class="admin-actions">
       <h3>Actions Admin</h3>
-      <button class="admin-only" onclick="addCoinsManually()">Ajouter coins manuellement</button>
+      <button onclick="addCoinsManually()">Ajouter Coins</button>
     </div>
-
     <div class="admin-orders">
-      <h3>Historique joueurs</h3>
+      <h3>Historique Joueurs</h3>
       <table>
-        <thead>
-          <tr>
-            <th>Joueur</th>
-            <th>Pack</th>
-            <th>Montant</th>
-            <th>Date</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Joueur</th><th>Pack</th><th>Montant</th><th>Date</th></tr></thead>
         <tbody id="ordersTable"></tbody>
       </table>
     </div>
@@ -78,12 +67,7 @@
   </div>
 </div>
 
+<!-- JS -->
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
