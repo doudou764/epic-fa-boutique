@@ -42,38 +42,119 @@ const products = [
   {id:9,name:"Mythic Pack",coins:12000,role:"Mythic",price:69.99},
   {id:10,name:"Titan Pack",coins:15000,role:"Titan",price:79.99},
 
-  {id:11,name:"Grade Supporter",coins:500,role:"Supporter",price:4.99},
-  {id:12,name:"Grade Donateur",coins:1000,role:"Donateur",price:9.99},
-  {id:13,name:"Grade Donateur+",coins:1500,role:"Donateur+",price:14.99},
-  {id:14,name:"Grade Premium",coins:2500,role:"Premium",price:19.99},
-  {id:15,name:"Grade VIP",coins:5000,role:"VIP",price:29.99},
-  {id:16,name:"Grade VIP+",coins:6000,role:"VIP+",price:39.99},
-  {id:17,name:"Grade Elite",coins:8000,role:"Elite",price:49.99},
-  {id:18,name:"Grade Elite+",coins:10000,role:"Elite+",price:59.99},
-  {id:19,name:"Grade Diamond",coins:12000,role:"Diamond",price:69.99},
-  {id:20,name:"Grade Diamond+",coins:15000,role:"Diamond+",price:79.99},
-  {id:21,name:"Grade Mythic",coins:18000,role:"Mythic",price:89.99},
-  {id:22,name:"Grade Mythic+",coins:20000,role:"Mythic+",price:99.99},
-  {id:23,name:"Grade Titan",coins:22000,role:"Titan",price:109.99},
-  {id:24,name:"Grade Titan+",coins:25000,role:"Titan+",price:119.99},
-  {id:25,name:"Grade Empire",coins:28000,role:"Empire",price:129.99},
-  {id:26,name:"Grade Empire+",coins:30000,role:"Empire+",price:139.99},
-  {id:27,name:"Grade Légende",coins:35000,role:"Légende",price:149.99},
-  {id:28,name:"Grade Légende+",coins:40000,role:"Légende+",price:159.99},
+  {id:11,name:"Coins 500",coins:500,role:"Supporter",price:3.99},
+  {id:12,name:"Coins 1000",coins:1000,role:"Donateur",price:7.99},
+  {id:13,name:"Coins 1500",coins:1500,role:"Donateur+",price:9.99},
+  {id:14,name:"Coins 2000",coins:2000,role:"Premium",price:12.99},
+  {id:15,name:"Coins 3000",coins:3000,role:"Premium",price:18.99},
+  {id:16,name:"Coins 4000",coins:4000,role:"VIP",price:24.99},
+  {id:17,name:"Coins 5000",coins:5000,role:"VIP+",price:29.99},
+  {id:18,name:"Coins 7500",coins:7500,role:"Elite",price:44.99},
+  {id:19,name:"Coins 10000",coins:10000,role:"Diamond",price:59.99},
 
-  {id:29,name:"Pack Event Bronze",coins:500,role:"Supporter",price:4.99},
-  {id:30,name:"Pack Event Silver",coins:1000,role:"Donateur",price:9.99},
-  {id:31,name:"Pack Event Gold",coins:2500,role:"Premium",price:19.99},
-  {id:32,name:"Pack Event Diamond",coins:6000,role:"Diamond",price:39.99},
-  {id:33,name:"Ticket tournoi",coins:0,role:"Donateur",price:14.99},
+  {id:20,name:"Grade Supporter",coins:500,role:"Supporter",price:4.99},
+  {id:21,name:"Grade Donateur",coins:1000,role:"Donateur",price:9.99},
+  {id:22,name:"Grade Donateur+",coins:1500,role:"Donateur+",price:14.99},
+  {id:23,name:"Grade Premium",coins:2500,role:"Premium",price:19.99},
+  {id:24,name:"Grade VIP",coins:5000,role:"VIP",price:29.99},
+  {id:25,name:"Grade VIP+",coins:6000,role:"VIP+",price:39.99},
+  {id:26,name:"Grade Elite",coins:8000,role:"Elite",price:49.99},
+  {id:27,name:"Grade Elite+",coins:10000,role:"Elite+",price:59.99},
+  {id:28,name:"Grade Diamond",coins:12000,role:"Diamond",price:69.99},
+  {id:29,name:"Grade Diamond+",coins:15000,role:"Diamond+",price:79.99},
+  {id:30,name:"Grade Mythic",coins:18000,role:"Mythic",price:89.99},
+  {id:31,name:"Grade Mythic+",coins:20000,role:"Mythic+",price:99.99},
+  {id:32,name:"Grade Titan",coins:22000,role:"Titan",price:109.99},
+  {id:33,name:"Grade Titan+",coins:25000,role:"Titan+",price:119.99},
+  {id:34,name:"Grade Empire",coins:28000,role:"Empire",price:129.99},
+  {id:35,name:"Grade Empire+",coins:30000,role:"Empire+",price:139.99},
+  {id:36,name:"Grade Légende",coins:35000,role:"Légende",price:149.99},
+  {id:37,name:"Grade Légende+",coins:40000,role:"Légende+",price:159.99},
 
-  {id:34,name:"Soutien 2€",coins:100,role:"Supporter",price:2},
-  {id:35,name:"Soutien 5€",coins:300,role:"Donateur",price:5},
-  {id:36,name:"Soutien 10€",coins:800,role:"Premium",price:10},
-  {id:37,name:"Soutien 25€",coins:2000,role:"VIP",price:25},
-  {id:38,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
-  {id:39,name:"UNBAN",coins:5000,role:"UNBAN",price:15}
+  {id:38,name:"Pack Event Bronze",coins:500,role:"Supporter",price:4.99},
+  {id:39,name:"Pack Event Silver",coins:1000,role:"Donateur",price:9.99},
+  {id:40,name:"Pack Event Gold",coins:2500,role:"Premium",price:19.99},
+  {id:41,name:"Pack Event Diamond",coins:6000,role:"Diamond",price:39.99},
+  {id:42,name:"Ticket tournoi",coins:0,role:"Donateur",price:14.99},
+
+  {id:43,name:"Soutien 2€",coins:100,role:"Supporter",price:2},
+  {id:44,name:"Soutien 5€",coins:300,role:"Donateur",price:5},
+  {id:45,name:"Soutien 10€",coins:800,role:"Premium",price:10},
+  {id:46,name:"Soutien 25€",coins:2000,role:"VIP",price:25},
+  {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
 ];
+
+// ================= AFFICHAGE DYNAMIQUE =================
+const container = document.querySelector('.packs');
+container.innerHTML = '';
+products.forEach(p => {
+  const div = document.createElement('div');
+  div.classList.add('card', 'product');
+  div.innerHTML = `
+    <h2>${p.name}</h2>
+    <p>${p.coins} Coins + Rôle ${p.role}</p>
+    <p class="price">${p.price.toFixed(2)} €</p>
+    <div id="paypal-button-${p.id}"></div>
+    <button class="buy" data-id="${p.id}">Acheter</button>
+  `;
+  container.appendChild(div);
+});
+
+// ================= PAYPAL =================
+products.forEach(p => {
+  paypal.Buttons({
+    style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'paypal' },
+    createOrder: (data, actions) => actions.order.create({
+      purchase_units: [{ amount: { value: p.price.toFixed(2) }, custom_id: p.id.toString() }]
+    }),
+    onApprove: (data, actions) => actions.order.capture().then(details => {
+      alert(`Paiement réussi pour ${p.name} !`);
+      // Envoie au backend pour coins + rôle Discord
+      fetch('http://localhost:3000/api/paypal-webhook', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          event_type:'PAYMENT.CAPTURE.COMPLETED',
+          resource:{
+            invoice_id:p.id,
+            custom_id:window.localStorage.getItem('discordId')||'testDiscordId'
+          }
+        })
+      }).then(res => console.log('Webhook envoyé', res.status));
+    })
+  }).render(`#paypal-button-${p.id}`);
+});
+
+// ================= CONNEXION DISCORD =================
+function discordLogin() {
+  const clientId = "TON_CLIENT_ID_DISCORD";
+  const redirectUri = encodeURIComponent(window.location.href);
+  const scope = encodeURIComponent("identify");
+  window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+if(code){
+  fetch('http://localhost:3000/api/discord-login',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({code})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log('Discord connecté :',data.discordId);
+    window.localStorage.setItem('discordId',data.discordId);
+  });
+}
+
+// ================= BOUTONS ACHAT (Fallback) =================
+document.querySelectorAll('.buy').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const productId = btn.dataset.id;
+    alert(`Produit ${productId} sélectionné. Paiement via PayPal ci-dessus.`);
+  });
+});
 
 /* =========================
    AFFICHAGE DYNAMIQUE
@@ -161,6 +242,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
