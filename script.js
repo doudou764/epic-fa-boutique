@@ -85,7 +85,7 @@ const products = [
 ];
 
 // ================= AFFICHAGE DYNAMIQUE =================
-const container = document.querySelector('.packs');
+const container = document.querySelector('.packs-container');
 container.innerHTML = '';
 products.forEach(p => {
   const div = document.createElement('div');
@@ -242,6 +242,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
