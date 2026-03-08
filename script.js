@@ -4,6 +4,16 @@
 let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
 /* =========================
+   HASH MOT DE PASSE ADMIN
+========================= */
+async function sha256(message){
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+/* =========================
    ADMIN ACCOUNTS
 ========================= */
 const ADMIN_ACCOUNTS = [
@@ -11,7 +21,6 @@ const ADMIN_ACCOUNTS = [
   { username: "06_staff", password: "05_STAFF2026", role: "admin" }
 ];
 let currentAdmin = null;
-
 /* =========================
    COOLDOWN + ANTI-REPLAY
 ========================= */
@@ -223,7 +232,29 @@ products.forEach(p => {
 function openAdmin(){ document.getElementById("adminLogin").style.display="flex"; }
 function closeAdmin(){ document.getElementById("adminPanel").style.display="none"; }
 
-function checkLogin(){
+async function checkLogin(){
+
+  const username = document.getElementById("adminUser").value;
+  const password = document.getElementById("adminPassword").value;
+
+  const passwordHash = await sha256(password);
+
+  const account = ADMIN_ACCOUNTS.find(a =>
+    a.username === username && a.password === passwordHash
+  );
+
+  if(!account){
+    document.getElementById("loginError").textContent="Identifiants invalides";
+    return;
+  }
+
+  currentAdmin = account;
+  document.getElementById("adminLogin").style.display="none";
+  document.getElementById("adminPanel").style.display="flex";
+
+  updateAdminStats();
+  renderOrders();
+}
   const username = document.getElementById("adminUser").value;
   const password = document.getElementById("adminPassword").value;
   const account = ADMIN_ACCOUNTS.find(a=>a.username===username && a.password===password);
@@ -265,6 +296,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
