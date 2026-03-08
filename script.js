@@ -30,8 +30,8 @@ const products = [
   {id:2,name:"Bronze Pack",coins:1000,role:"Donateur",price:5},
   {id:3,name:"Argent Pack",coins:2000,role:"Donateur+",price:9.99},
   {id:4,name:"Or Pack",coins:3000,role:"Premium",price:18.99},
-  {id:5,name:"VIP Pack",coins:5000,role:"VIP",price:29.99},
-  {id:6,name:"VIP+ Pack",coins:6000,role:"VIP+",price:39.99},
+  {id:5,name:"VIP Pack",coins:5000,role:"VIP",price:29.99, subscription: true},
+  {id:6,name:"VIP+ Pack",coins:6000,role:"VIP+",price:39.99, subscription: true},
   {id:7,name:"Elite Pack",coins:8000,role:"Elite",price:49.99},
   {id:8,name:"Diamond Pack",coins:10000,role:"Diamond",price:59.99},
   {id:9,name:"Mythic Pack",coins:12000,role:"Mythic",price:69.99},
@@ -173,6 +173,7 @@ window.addEventListener("load",()=>document.getElementById("loader").style.displ
 
 /* ===================== SCROLL PACKS ===================== */
 function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
+
 
 
 
