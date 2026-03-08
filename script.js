@@ -107,23 +107,46 @@ products.forEach(p => {
     createOrder: (data, actions) => actions.order.create({
       purchase_units: [{ amount: { value: p.price.toFixed(2) }, custom_id: p.id.toString() }]
     }),
-    onApprove: (data, actions) => actions.order.capture().then(details => {
-      alert(`Paiement réussi pour ${p.name} !`);
-      // Envoie au backend pour coins + rôle Discord
-      fetch('http://localhost:3000/api/paypal-webhook', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          event_type:'PAYMENT.CAPTURE.COMPLETED',
-          resource:{
-            invoice_id:p.id,
-            custom_id:window.localStorage.getItem('discordId')||'testDiscordId'
-          }
-        })
-      }).then(res => console.log('Webhook envoyé', res.status));
-    })
-  }).render(`#paypal-button-${p.id}`);
+    onApprove: async (data, actions) => {
+
+const details = await actions.order.capture();
+
+const transactionID =
+details.purchase_units[0].payments.captures[0].id;
+
+const email = details.payer.email_address;
+
+const amount =
+details.purchase_units[0].payments.captures[0].amount.value;
+
+if(!transactionID){
+alert("Erreur paiement");
+return;
+}
+
+// anti replay
+if(localStorage.getItem(transactionID)){
+alert("Transaction déjà utilisée");
+return;
+}
+
+localStorage.setItem(transactionID,"used");
+
+orders.push({
+player: email,
+pack: p.name,
+amount: amount,
+transaction: transactionID,
+date: new Date().toLocaleString()
 });
+
+localStorage.setItem("epic_orders",JSON.stringify(orders));
+
+alert("Paiement confirmé !");
+renderOrders();
+updateAdminStats();
+
+}
 
 // ================= CONNEXION DISCORD =================
 function discordLogin() {
@@ -242,6 +265,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
