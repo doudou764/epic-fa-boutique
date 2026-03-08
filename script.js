@@ -107,20 +107,42 @@ function renderPacks(){
         `;
         container.appendChild(div);
 
-        // PayPal
-        paypal.Buttons({
-            style:{layout:'vertical',color:'gold',shape:'pill',label:'paypal'},
-            createOrder:(data,actions)=>actions.order.create({
-                purchase_units:[{amount:{value:p.price.toFixed(2)},description:`${p.name} EPIC RP`}]
-            }),
-            onApprove:(data,actions)=>actions.order.capture().then(details=>{
-                alert(`Paiement confirmé pour ${p.name} ! Coins ajoutés manuellement par admin.`);
-                orders.push({player:details.payer.name.given_name || details.payer.email_address, pack:p.name, amount:p.price, date:new Date().toLocaleString()});
-                localStorage.setItem("epic_orders",JSON.stringify(orders));
-                renderOrders();
-                updateAdminStats();
-            })
-        }).render(`#paypal-button-${p.id}`);
+        // PayPal : abonnement VIP / achat classique
+if(p.subscription){
+    // Bouton pour abonnement mensuel
+    paypal.Buttons({
+        style:{layout:'vertical',color:'blue',shape:'pill',label:'subscribe'},
+        createSubscription:(data,actions)=>{
+            return actions.subscription.create({
+                plan_id: p.id === 5 ? "P-7M816397WK677023ENGWV45I" : "P-2XN14669TF811411ENGWV7SY" // Remplace par tes Plan IDs PayPal
+            });
+        },
+        onApprove:(data,actions)=>{
+            alert(`Abonnement ${p.name} activé ! Les coins et le rôle seront attribués chaque mois par un admin.`);
+            // Ici tu peux stocker data.subscriptionID pour suivi
+        }
+    }).render(`#paypal-button-${p.id}`);
+}else{
+    // Bouton classique pour les autres packs
+    paypal.Buttons({
+        style:{layout:'vertical',color:'gold',shape:'pill',label:'paypal'},
+        createOrder:(data,actions)=>actions.order.create({
+            purchase_units:[{amount:{value:p.price.toFixed(2)},description:`${p.name} EPIC RP`}]
+        }),
+        onApprove:(data,actions)=>actions.order.capture().then(details=>{
+            alert(`Paiement confirmé pour ${p.name} ! Coins ajoutés manuellement par admin.`);
+            orders.push({
+                player:details.payer.name.given_name || details.payer.email_address,
+                pack:p.name,
+                amount:p.price,
+                date:new Date().toLocaleString()
+            });
+            localStorage.setItem("epic_orders",JSON.stringify(orders));
+            renderOrders();
+            updateAdminStats();
+        })
+    }).render(`#paypal-button-${p.id}`);
+}
 
         div.querySelector(".buy-btn").addEventListener("click",()=>{
             if(!canPay()) return;
@@ -173,6 +195,7 @@ window.addEventListener("load",()=>document.getElementById("loader").style.displ
 
 /* ===================== SCROLL PACKS ===================== */
 function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
+
 
 
 
