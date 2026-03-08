@@ -24,20 +24,23 @@ let currentAdmin = null;
 /* =========================
    COOLDOWN + ANTI-REPLAY
 ========================= */
-const PAYMENT_COOLDOWN = 60000;
-let lastPaymentTime = parseInt(localStorage.getItem("last_payment_time")) || 0;
+let paymentCooldown = false;
 
-function canPay() {
-  const now = Date.now();
-  if (now - lastPaymentTime < PAYMENT_COOLDOWN) {
-    alert("Paiement trop rapide. Attends 1 minute.");
-    return false;
-  }
-  lastPaymentTime = now;
-  localStorage.setItem("last_payment_time", lastPaymentTime);
-  return true;
+function canPay(){
+
+if(paymentCooldown){
+alert("Attends quelques secondes");
+return false;
 }
 
+paymentCooldown = true;
+
+setTimeout(()=>{
+paymentCooldown=false;
+},10000);
+
+return true;
+}
 // ================= PRODUITS COMPLETS =================
 const products = [
   {id:1,name:"Starter Pack",coins:500,role:"Supporter",price:2},
@@ -296,6 +299,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
