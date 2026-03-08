@@ -1,57 +1,29 @@
-/* ======================================================
-   EPIC FA BOUTIQUE - SCRIPT PRINCIPAL
-   Version optimisée et sécurisée
-====================================================== */
-
-/* =========================
-   BASE DE DONNEES LOCALE
-========================= */
+/* ===================== BASE DONNEES ===================== */
 let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
-/* =========================
-   HASH SHA256 (ADMIN)
-========================= */
-async function sha256(message){
-const msgBuffer = new TextEncoder().encode(message);
-const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-const hashArray = Array.from(new Uint8Array(hashBuffer));
-return hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+/* ===================== HASH ADMIN ===================== */
+async function sha256(msg){
+    const buf = new TextEncoder().encode(msg);
+    const hash = await crypto.subtle.digest("SHA-256", buf);
+    return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 
-/* =========================
-   ADMIN ACCOUNTS (HASH)
-========================= */
+/* ===================== ADMIN ===================== */
 const ADMIN_ACCOUNTS = [
-{
-username:"015_fonda",
-password:"014_FONDA2026",
-role:"superadmin"
-}
+    {username:"015_fonda", password:"", role:"superadmin"}, // hasher password
+    {username:"06_staff", password:"", role:"admin"}
 ];
-
 let currentAdmin = null;
 
-/* =========================
-   ANTI SPAM PAIEMENT
-========================= */
+/* ===================== COOLDOWN ===================== */
 let paymentCooldown = false;
-
 function canPay(){
-
-if(paymentCooldown){
-alert("Attends quelques secondes");
-return false;
+    if(paymentCooldown){alert("Attends quelques secondes."); return false;}
+    paymentCooldown = true;
+    setTimeout(()=>{paymentCooldown=false;},10000);
+    return true;
 }
 
-paymentCooldown = true;
-
-setTimeout(()=>{
-paymentCooldown=false;
-},8000);
-
-return true;
-
-}
 // ================= PRODUITS COMPLETS =================
 const products = [
   {id:1,name:"Starter Pack",coins:500,role:"Supporter",price:2},
@@ -107,321 +79,86 @@ const products = [
   {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
 ];
 
-/* =========================
-   AFFICHAGE PRODUITS
-========================= */
+/* ===================== AFFICHAGE PACKS ===================== */
+const container = document.getElementById("packs");
+function renderPacks(){
+    container.innerHTML="";
+    products.forEach(p=>{
+        const div=document.createElement("div");
+        div.className="card product";
+        div.innerHTML=`
+            <h2>${p.name}</h2>
+            <p>${p.coins} Coins + Rôle ${p.role}</p>
+            <p class="price">${p.price.toFixed(2)} €</p>
+            <div id="paypal-button-${p.id}"></div>
+            <button class="buy-btn" data-id="${p.id}">Acheter</button>
+        `;
+        container.appendChild(div);
 
-function renderProducts(){
+        // PayPal
+        paypal.Buttons({
+            style:{layout:'vertical',color:'gold',shape:'pill',label:'paypal'},
+            createOrder:(data,actions)=>actions.order.create({
+                purchase_units:[{amount:{value:p.price.toFixed(2)},description:`${p.name} EPIC RP`}]
+            }),
+            onApprove:(data,actions)=>actions.order.capture().then(details=>{
+                alert(`Paiement confirmé pour ${p.name} ! Un admin ajoutera les coins manuellement.`);
+                orders.push({player:details.payer.name.given_name || details.payer.email_address, pack:p.name, amount:p.price, date:new Date().toLocaleString()});
+                localStorage.setItem("epic_orders",JSON.stringify(orders));
+                renderOrders();
+                updateAdminStats();
+            })
+        }).render(`#paypal-button-${p.id}`);
 
-const container = document.querySelector(".packs-container");
-
-if(!container) return;
-
-container.innerHTML="";
-
-const fragment = document.createDocumentFragment();
-
-products.forEach(p=>{
-
-const card = document.createElement("div");
-
-card.classList.add("card","product");
-
-card.innerHTML = `
-<h2>${p.name}</h2>
-<p>${p.coins} Coins + Rôle ${p.role}</p>
-<p class="price">${p.price.toFixed(2)} €</p>
-
-<div id="paypal-button-${p.id}"></div>
-
-<button class="buy" data-id="${p.id}">
-Acheter
-</button>
-`;
-
-fragment.appendChild(card);
-
-});
-
-container.appendChild(fragment);
-
+        // Bouton fallback
+        div.querySelector(".buy-btn").addEventListener("click",()=>{
+            if(!canPay()) return;
+            alert("Utilise le bouton PayPal pour confirmer ton achat !");
+        });
+    });
 }
+renderPacks();
 
-/* =========================
-   PAYPAL
-========================= */
-
-function initPayPal(){
-
-products.forEach(p=>{
-
-paypal.Buttons({
-
-style:{
-layout:'vertical',
-color:'gold',
-shape:'pill',
-label:'paypal'
-},
-
-createOrder:(data,actions)=>{
-
-return actions.order.create({
-
-purchase_units:[{
-amount:{ value:p.price.toFixed(2) },
-custom_id:p.id.toString()
-}]
-
-});
-
-},
-
-onApprove: async (data,actions)=>{
-
-const details = await actions.order.capture();
-
-const capture =
-details.purchase_units[0].payments.captures[0];
-
-const transactionID = capture.id;
-
-const email = details.payer.email_address;
-
-const amount = capture.amount.value;
-
-if(!transactionID){
-alert("Erreur paiement");
-return;
-}
-
-/* anti replay */
-
-if(localStorage.getItem(transactionID)){
-
-alert("Transaction déjà utilisée");
-return;
-
-}
-
-localStorage.setItem(transactionID,"used");
-
-/* sauvegarde commande */
-
-orders.push({
-
-player:email,
-pack:p.name,
-amount:amount,
-transaction:transactionID,
-date:new Date().toLocaleString()
-
-});
-
-localStorage.setItem("epic_orders",JSON.stringify(orders));
-
-alert("Paiement confirmé");
-
-renderOrders();
-updateAdminStats();
-
-}
-
-}).render(`#paypal-button-${p.id}`);
-
-});
-
-}
-
-/* =========================
-   BOUTONS ACHAT
-========================= */
-
-function initBuyButtons(){
-
-document.querySelectorAll(".buy").forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-if(!canPay()) return;
-
-alert("Utilise le bouton PayPal");
-
-});
-
-});
-
-}
-
-/* =========================
-   DISCORD LOGIN
-========================= */
-
-function discordLogin(){
-
-const clientId = "1347613959489982586";
-
-const redirectUri = encodeURIComponent(window.location.href);
-
-const scope = encodeURIComponent("identify");
-
-window.location.href =
-`https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
-
-}
-
-/* =========================
-   ADMIN PANEL
-========================= */
-
-function openAdmin(){
-
-document.getElementById("adminLogin").style.display="flex";
-
-}
-
-function closeAdmin(){
-
-document.getElementById("adminPanel").style.display="none";
-
-}
-
-/* =========================
-   LOGIN ADMIN
-========================= */
-
+/* ===================== ADMIN PANEL ===================== */
+function openAdmin(){document.getElementById("adminLogin").style.display="flex";}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
 async function checkLogin(){
-
-const username =
-document.getElementById("adminUser").value;
-
-const password =
-document.getElementById("adminPassword").value;
-
-const passwordHash = await sha256(password);
-
-const account = ADMIN_ACCOUNTS.find(a=>
-
-a.username===username &&
-a.password===passwordHash
-
-);
-
-if(!account){
-
-document.getElementById("loginError")
-.textContent="Identifiants invalides";
-
-return;
-
+    const username=document.getElementById("adminUser").value;
+    const password=document.getElementById("adminPassword").value;
+    const hash=await sha256(password);
+    const account=ADMIN_ACCOUNTS.find(a=>a.username===username && a.password===hash);
+    if(!account){document.getElementById("loginError").textContent="Identifiants invalides"; return;}
+    currentAdmin=account;
+    document.getElementById("adminLogin").style.display="none";
+    document.getElementById("adminPanel").style.display="flex";
+    renderOrders();
+    updateAdminStats();
 }
-
-currentAdmin = account;
-
-document.getElementById("adminLogin")
-.style.display="none";
-
-document.getElementById("adminPanel")
-.style.display="flex";
-
-updateAdminStats();
-renderOrders();
-
-}
-
-/* =========================
-   HISTORIQUE COMMANDES
-========================= */
-
-function renderOrders(){
-
-const table =
-document.getElementById("ordersTable");
-
-if(!table) return;
-
-table.innerHTML="";
-
-orders.forEach(o=>{
-
-const row =
-document.createElement("tr");
-
-row.innerHTML=`
-<td>${o.player}</td>
-<td>${o.pack}</td>
-<td>${o.amount} €</td>
-<td>${o.date}</td>
-`;
-
-table.appendChild(row);
-
-});
-
-}
-
-/* =========================
-   STATS ADMIN
-========================= */
-
-function updateAdminStats(){
-
-const revenue = orders.reduce(
-
-(sum,o)=>sum+parseFloat(o.amount),
-
-0
-
-);
-
-document.getElementById("adminRevenue")
-.textContent = revenue.toFixed(2)+" €";
-
-document.getElementById("adminOrders")
-.textContent = orders.length;
-
-}
-
-/* =========================
-   ACTION ADMIN
-========================= */
-
 function addCoinsManually(){
-
-const player = prompt("Nom du joueur");
-
-const coins = prompt("Coins à ajouter");
-
-alert(`Coins ajoutés à ${player} : ${coins}`);
-
+    const player=prompt("Nom du joueur:");
+    const coins=prompt("Nombre de coins à ajouter:");
+    alert(`Coins ajoutés à ${player}: ${coins}`);
 }
 
-/* =========================
-   LOADER
-========================= */
+/* ===================== HISTORIQUE ===================== */
+function renderOrders(){
+    const table=document.getElementById("ordersTable");
+    if(!table) return;
+    table.innerHTML="";
+    orders.forEach(o=>{
+        const row=document.createElement("tr");
+        row.innerHTML=`<td>${o.player}</td><td>${o.pack}</td><td>${o.amount} €</td><td>${o.date}</td>`;
+        table.appendChild(row);
+    });
+}
+function updateAdminStats(){
+    const totalRevenue=orders.reduce((sum,o)=>sum+parseFloat(o.amount),0);
+    document.getElementById("adminRevenue").textContent=totalRevenue.toFixed(2)+" €";
+    document.getElementById("adminOrders").textContent=orders.length;
+}
 
-window.addEventListener("load",()=>{
+/* ===================== LOADER ===================== */
+window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 
-const loader = document.getElementById("loader");
-
-if(loader) loader.style.display="none";
-
-});
-
-/* =========================
-   INITIALISATION
-========================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-renderProducts();
-
-initPayPal();
-
-initBuyButtons();
-
-renderOrders();
-
-updateAdminStats();
-
-});
+/* ===================== SCROLL PACKS ===================== */
+function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
