@@ -87,7 +87,7 @@ const products = [
   {id:53,name:"Administrateur",coins:10000,role:"Administrateur",price:80},
   {id:54,name:"Owner",coins:15000,role:"Owner",price:150},
 
-  {id:55,name:"Achat serveur",coins:0,role:"Propriétaire",price:1000}
+  {id:55,name:"Achat serveur",coins:0,role:"Propriétaire",price:10000}
 ];
 
 
@@ -173,6 +173,7 @@ window.addEventListener("load",()=>document.getElementById("loader").style.displ
 
 /* ===================== SCROLL PACKS ===================== */
 function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
+
 
 
 
