@@ -185,10 +185,15 @@ if(code){
 
 // ================= BOUTONS ACHAT (Fallback) =================
 document.querySelectorAll('.buy').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const productId = btn.dataset.id;
-    alert(`Produit ${productId} sélectionné. Paiement via PayPal ci-dessus.`);
-  });
+
+btn.addEventListener("click",()=>{
+
+if(!canPay()) return;
+
+alert("Utilise le bouton PayPal");
+
+});
+
 });
 
 /* =========================
@@ -299,6 +304,7 @@ function addCoinsManually(){
 ========================= */
 window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
 renderOrders(); updateAdminStats();
+
 
 
 
