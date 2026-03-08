@@ -1,7 +1,7 @@
-/* ===================== BASE DONNEES ===================== */
+/* ===================== BASE ===================== */
 let orders = JSON.parse(localStorage.getItem("epic_orders")) || [];
 
-/* ===================== HASH ADMIN ===================== */
+/* ===================== HASH ===================== */
 async function sha256(msg){
     const buf = new TextEncoder().encode(msg);
     const hash = await crypto.subtle.digest("SHA-256", buf);
@@ -10,16 +10,16 @@ async function sha256(msg){
 
 /* ===================== ADMIN ===================== */
 const ADMIN_ACCOUNTS = [
-    {username:"015_fonda", password:"", role:"superadmin"}, // hasher password
-    {username:"06_staff", password:"", role:"admin"}
+    {username:"015_fonda", password:"014_FONDA", role:"superadmin"},
+    {username:"06_staff", password:"05_STAFF", role:"admin"}
 ];
 let currentAdmin = null;
 
 /* ===================== COOLDOWN ===================== */
-let paymentCooldown = false;
+let paymentCooldown=false;
 function canPay(){
     if(paymentCooldown){alert("Attends quelques secondes."); return false;}
-    paymentCooldown = true;
+    paymentCooldown=true;
     setTimeout(()=>{paymentCooldown=false;},10000);
     return true;
 }
@@ -79,8 +79,9 @@ const products = [
   {id:47,name:"Soutien 50€",coins:5000,role:"Légende",price:50}
 ];
 
+
 /* ===================== AFFICHAGE PACKS ===================== */
-const container = document.getElementById("packs");
+const container=document.getElementById("packs");
 function renderPacks(){
     container.innerHTML="";
     products.forEach(p=>{
@@ -102,7 +103,7 @@ function renderPacks(){
                 purchase_units:[{amount:{value:p.price.toFixed(2)},description:`${p.name} EPIC RP`}]
             }),
             onApprove:(data,actions)=>actions.order.capture().then(details=>{
-                alert(`Paiement confirmé pour ${p.name} ! Un admin ajoutera les coins manuellement.`);
+                alert(`Paiement confirmé pour ${p.name} ! Coins ajoutés manuellement par admin.`);
                 orders.push({player:details.payer.name.given_name || details.payer.email_address, pack:p.name, amount:p.price, date:new Date().toLocaleString()});
                 localStorage.setItem("epic_orders",JSON.stringify(orders));
                 renderOrders();
@@ -110,7 +111,6 @@ function renderPacks(){
             })
         }).render(`#paypal-button-${p.id}`);
 
-        // Bouton fallback
         div.querySelector(".buy-btn").addEventListener("click",()=>{
             if(!canPay()) return;
             alert("Utilise le bouton PayPal pour confirmer ton achat !");
@@ -119,7 +119,7 @@ function renderPacks(){
 }
 renderPacks();
 
-/* ===================== ADMIN PANEL ===================== */
+/* ===================== ADMIN ===================== */
 function openAdmin(){document.getElementById("adminLogin").style.display="flex";}
 function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
 async function checkLogin(){
