@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPIC FA I ANARCHIE - Boutique Officielle</title>
+<title>EPIC FA | Boutique Officielle</title>
 
 <!-- Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,122 +20,35 @@
 <!-- Loader -->
 <div id="loader"><div class="spinner"></div></div>
 
-<!-- Header / Hero -->
+<!-- Header -->
 <header class="hero">
   <h1>EPIC FA | Boutique Officielle</h1>
   <p>Boost ton expérience RP avec nos packs coins !</p>
-  <p>💎 Pour chaque achat effectué, ouvre un ticket sur notre Discord pour recevoir tes coins rapidement !</p>
   <button class="btn" onclick="scrollToPacks()">Voir les Packs</button>
 </header>
 
-  <!-- Boutons de filtre -->
+<!-- FILTRES -->
+<section id="packs-section">
   <div class="filter-buttons">
-    <button class="filter-btn" data-category="coins">Coins</button>
-    <button class="filter-btn" data-category="vip">VIP</button>
-    <button class="filter-btn" data-category="soutien">Soutien</button>
-    <button class="filter-btn" data-category="pack">Pack</button>
-    <button class="filter-btn" data-category="ticket">ticket</button>
-    <button class="filter-btn" data-category="grade">Grade</button>
-    <button class="filter-btn" data-category="main-team">Main Team</button>
-    <button class="filter-btn" data-category="unban">Unban</button>
-    <button class="filter-btn" data-category="achat-serveur">Achat Serveur</button>
+    <button class="filter-btn" data-category="Coins">Coins</button>
+    <button class="filter-btn" data-category="VIP">VIP</button>
+    <button class="filter-btn" data-category="Soutien">Soutien</button>
+    <button class="filter-btn" data-category="Pack">Pack</button>
+    <button class="filter-btn" data-category="Grade">Grade</button>
+    <button class="filter-btn" data-category="Main Team">Main Team</button>
+    <button class="filter-btn" data-category="Unban">Unban</button>
+    <button class="filter-btn" data-category="Achat serveur">Achat Serveur</button>
   </div>
 
-  <!-- Produits -->
-  <div class="products-container">
-    <div class="product" data-category="coins">500 Coins - 3,99€</div>
-    <div class="product" data-category="coins">1000 Coins - 7,99€</div>
-    <div class="product" data-category="coins">1500 Coins - 9,99€</div>
-    <div class="product" data-category="coins">2000 Coins - 12,99€</div>
-    <div class="product" data-category="coins">3000 Coins - 18,99€</div>
-    <div class="product" data-category="coins">4000 Coins - 24,99€</div>
-    <div class="product" data-category="coins">5000 Coins - 29,99€</div>
-    <div class="product" data-category="coins">7500 Coins - 44,99€</div>
-    <div class="product" data-category="coins">10000 Coins - 59,99€</div>
-    <div class="product" data-category="vip">VIP Pack - 29,99€</div>
-    <div class="product" data-category="vip">VIP+ Pack - 39,99€</div>
-    <div class="product" data-category="pack">Starter Pack - 2,00€</div>
-    <div class="product" data-category="pack">Bronze Pack - 5,00€</div>
-    <div class="product" data-category="pack">Argent Pack - 9,99€</div>
-    <div class="product" data-category="pack">Pack Event Bronze - 4,99€</div>
-    <div class="product" data-category="pack">Pack Event Silver - 9,99€</div>
-    <div class="product" data-category="pack">Pack Event Gold - 19,99€</div>
-    <div class="product" data-category="pack">Pack Event Diamond - 39,99€</div>
-    <div class="product" data-category="ticket">Ticket Tournoi - 14,99€</div>
-    <div class="product" data-category="grade">Grade Supporter - 4,99€</div>
-    <div class="product" data-category="grade">Grade Donateur - 9,99€</div>
-    <div class="product" data-category="grade">Grade Donateur+ - 14,99€</div>
-    <div class="product" data-category="grade">Grade premium - 19,99€</div>
-    <div class="product" data-category="grade">Grade Elite - 49,99€</div>
-    <div class="product" data-category="grade">Grade Elite+ - 59,99€</div>
-    <div class="product" data-category="grade">Grade Diamond - 69,99€</div>
-    <div class="product" data-category="grade">Grade Diamond+ - 79,99€</div>
-    <div class="product" data-category="grade">Grade Mythic - 89,99€</div>
-    <div class="product" data-category="grade">Grade Mythic+ - 99,99€</div>
-    <div class="product" data-category="grade">Grade Titan - 109,99€</div>
-    <div class="product" data-category="grade">Grade Titan+ - 119,99€</div>
-    <div class="product" data-category="grade">Grade Empire - 129,99€</div>
-    <div class="product" data-category="grade">Grade Empire+ - 139,99€</div>
-    <div class="product" data-category="grade">Grade Légende - 149,99€</div>
-    <div class="product" data-category="grade">Grade Légende+ - 159,99€</div>
-    <div class="product" data-category="main-team">Administrateur - 80,00€</div>
-    <div class="product" data-category="main-team">Moderateur - 40,00€</div>
-    <div class="product" data-category="main-team">Owner - 150,00€</div>
-    <div class="product" data-category="unban">Unban - 15,00€</div>
-    <div class="product" data-category="achat-serveur">Achat Serveur - 10000,00€</div>
-    <div class="product" data-category="soutien">Soutien - 2,00€</div>
-    <div class="product" data-category="soutien">Soutien - 5,00€</div>
-    <div class="product" data-category="soutien">Soutien - 10,00€</div>
-    <div class="product" data-category="soutien">Soutien - 25,00€</div>
-    <div class="product" data-category="soutien">Soutien - 50,00€</div>
-    <div class="product" data-category="soutien">Soutien - 100,00€</div>
-    <div class="product" data-category="soutien">Soutien - 150,00€</div>
-    <div class="product" data-category="soutien">Soutien - 200,00€</div>
-  </div>
-
+  <!-- CONTENEUR POUR LES PACKS -->
+  <div id="packs" class="packs-container"></div>
 </section>
 
-<!-- Admin Panel -->
-<div id="adminPanel" class="admin-panel" style="display:none;">
-  <div class="admin-container">
-    <div class="admin-header">
-      <h2>Admin Panel — EPIC RP</h2>
-      <button onclick="closeAdmin()">X</button>
-    </div>
-    <div class="admin-stats">
-      <div class="stat"><h3>Revenus</h3><p id="adminRevenue">0 €</p></div>
-      <div class="stat"><h3>Commandes</h3><p id="adminOrders">0</p></div>
-    </div>
-    <div class="admin-actions">
-      <h3>Actions Admin</h3>
-      <button onclick="addCoinsManually()">Ajouter Coins</button>
-    </div>
-    <div class="admin-orders">
-      <h3>Historique Joueurs</h3>
-      <table>
-        <thead><tr><th>Joueur</th><th>Pack</th><th>Montant</th><th>Date</th></tr></thead>
-        <tbody id="ordersTable"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- Admin Login -->
-<div id="adminLogin" class="admin-login">
-  <div class="login-box">
-    <h2>Connexion Admin</h2>
-    <input id="adminUser" placeholder="Username" autocomplete="off">
-    <input type="password" id="adminPassword" placeholder="Mot de passe" autocomplete="off">
-    <button onclick="checkLogin()">Se connecter</button>
-    <p id="loginError"></p>
-  </div>
-</div>
-
+<!-- Admin + Login (inchangés) -->
+... (le reste de ton HTML Admin et Login)
+  
 <!-- JS -->
 <script src="script.js" defer></script>
+
 </body>
 </html>
-
-
-
-
