@@ -43,3 +43,30 @@ button{cursor:pointer;outline:none;}
 .login-box input{display:block;width:100%;padding:10px;margin:10px 0;border-radius:8px;border:none;background:#333;color:#fff;}
 .login-box button{padding:10px 20px;background:#ff0000;border:none;border-radius:8px;color:#fff;font-weight:700;}
 .login-box button:hover{background:#ff4d4d;}
+
+/* ================= FILTRES BOUTIQUE ================= */
+.filter-buttons {
+  margin-bottom: 20px;
+}
+.filter-btn {
+  padding: 8px 16px;
+  margin: 4px;
+  border: none;
+  background-color: #222;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.filter-btn:hover {
+  background-color: #ff0000;
+}
+
+.product {
+  display: none; /* Masqué par défaut */
+  padding: 12px;
+  margin: 8px;
+  background-color: #111;
+  color: #fff;
+  border-radius: 8px;
+}
