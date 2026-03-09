@@ -51,8 +51,6 @@ const products = [
   {id:21,name:"Grade Donateur",coins:1000,role:"Donateur",price:9.99},
   {id:22,name:"Grade Donateur+",coins:1500,role:"Donateur+",price:14.99},
   {id:23,name:"Grade Premium",coins:2500,role:"Premium",price:19.99},
-  {id:24,name:"Grade VIP",coins:5000,role:"VIP",price:29.99},
-  {id:25,name:"Grade VIP+",coins:6000,role:"VIP+",price:39.99},
   {id:26,name:"Grade Elite",coins:8000,role:"Elite",price:49.99},
   {id:27,name:"Grade Elite+",coins:10000,role:"Elite+",price:59.99},
   {id:28,name:"Grade Diamond",coins:12000,role:"Diamond",price:69.99},
@@ -150,7 +148,24 @@ if(p.subscription){
         });
     });
 }
-renderPacks();
+renderPacks(); // <-- ici, les produits sont déjà affichés
+
+/* ===================== FILTRES BOUTIQUE ===================== */
+const filterButtons = document.querySelectorAll('.filter-btn');
+const productCards = document.querySelectorAll('.product');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        productCards.forEach(card => {
+            if (card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
 
 /* ===================== ADMIN ===================== */
 function openAdmin(){document.getElementById("adminLogin").style.display="flex";}
@@ -195,6 +210,7 @@ window.addEventListener("load",()=>document.getElementById("loader").style.displ
 
 /* ===================== SCROLL PACKS ===================== */
 function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
+
 
 
 
