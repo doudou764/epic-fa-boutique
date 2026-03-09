@@ -5,29 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPIC FA | Boutique Officielle</title>
 
-<!-- Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- CSS -->
 <link rel="stylesheet" href="style.css">
 
-<!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AQ4y8L_AnxEHhCeKLGHE2b6vjZeYodp_E3pVvPM68IeP2k-RE4ICt_BVEtr2owIEgSOz5QMkPpSsxdVn&currency=EUR" defer></script>
+<script src="script.js" defer></script>
 </head>
 <body>
 
-<!-- Loader -->
 <div id="loader"><div class="spinner"></div></div>
 
-<!-- Header -->
 <header class="hero">
   <h1>EPIC FA | Boutique Officielle</h1>
   <p>Boost ton expérience RP avec nos packs coins !</p>
   <button class="btn" onclick="scrollToPacks()">Voir les Packs</button>
 </header>
 
-<!-- FILTRES -->
 <section id="packs-section">
   <div class="filter-buttons">
     <button class="filter-btn" data-category="Coins">Coins</button>
@@ -37,18 +32,13 @@
     <button class="filter-btn" data-category="Grade">Grade</button>
     <button class="filter-btn" data-category="Main Team">Main Team</button>
     <button class="filter-btn" data-category="Unban">Unban</button>
-    <button class="filter-btn" data-category="Achat serveur">Achat Serveur</button>
-    <button class="filter-btn" data-category="Ticket">Ticket</button>
+    <button class="filter-btn" data-category="Achat Serveur">Achat Serveur</button>
   </div>
 
-  <!-- CONTENEUR POUR LES PACKS -->
   <div id="packs" class="packs-container"></div>
 </section>
-  
-<!-- JS -->
-<script src="script.js" defer></script>
+
+<!-- Admin et Login (inchangés) -->
 
 </body>
 </html>
-
-
