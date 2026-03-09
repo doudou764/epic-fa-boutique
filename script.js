@@ -87,136 +87,69 @@ const products = [
 ];
 
 
-/* ===================== AFFICHAGE PACKS ===================== */
-const container=document.getElementById("packs");
-function renderPacks(){
-    container.innerHTML="";
-    products.forEach(p=>{
-        const div=document.createElement("div");
-        div.className="card product";
-        div.innerHTML=`
-            <h2>${p.name}</h2>
-            <p>${p.coins} Coins + Rôle ${p.role}</p>
-            <p class="price">${p.price.toFixed(2)} €</p>
-            <div id="paypal-button-${p.id}"></div>
-            <button class="buy-btn" data-id="${p.id}">Acheter</button>
-        `;
-        container.appendChild(div);
+// ---------------- RENDER PACKS ----------------
+const container = document.getElementById("packs");
 
-        // PayPal : abonnement VIP / achat classique
-if(p.subscription){
-    // Bouton pour abonnement mensuel
-    paypal.Buttons({
+function renderPacks() {
+  container.innerHTML = "";
+  products.forEach(p=>{
+    const div = document.createElement("div");
+    div.className = "card product";
+    div.dataset.category = p.category;
+    div.innerHTML = `
+      <h2>${p.name}</h2>
+      <p>${p.coins} Coins + Rôle ${p.role}</p>
+      <p class="price">${p.price.toFixed(2)} €</p>
+      <div id="paypal-button-${p.id}"></div>
+      <button class="buy-btn" data-id="${p.id}">Acheter</button>
+    `;
+    container.appendChild(div);
+
+    // PayPal
+    if(p.subscription){
+      paypal.Buttons({
         style:{layout:'vertical',color:'blue',shape:'pill',label:'subscribe'},
         createSubscription:(data,actions)=>{
-            return actions.subscription.create({
-                plan_id: p.id === 5 ? "P-7M816397WK677023ENGWV45I" : "P-2XN14669TF811411ENGWV7SY" // Remplace par tes Plan IDs PayPal
-            });
+          return actions.subscription.create({
+            plan_id: p.id === 5 ? "P-7M816397WK677023ENGWV45I" : "P-2XN14669TF811411ENGWV7SY"
+          });
         },
         onApprove:(data,actions)=>{
-            alert(`Abonnement ${p.name} activé ! Les coins et le rôle seront attribués chaque mois par un admin.`);
-            // Ici tu peux stocker data.subscriptionID pour suivi
+          alert(`Abonnement ${p.name} activé !`);
         }
-    }).render(`#paypal-button-${p.id}`);
-}else{
-    // Bouton classique pour les autres packs
-    paypal.Buttons({
+      }).render(`#paypal-button-${p.id}`);
+    } else {
+      paypal.Buttons({
         style:{layout:'vertical',color:'gold',shape:'pill',label:'paypal'},
         createOrder:(data,actions)=>actions.order.create({
-            purchase_units:[{amount:{value:p.price.toFixed(2)},description:`${p.name} EPIC RP`}]
+          purchase_units:[{amount:{value:p.price.toFixed(2)},description:`${p.name} EPIC RP`}]
         }),
         onApprove:(data,actions)=>actions.order.capture().then(details=>{
-            alert(`Paiement confirmé pour ${p.name} ! Coins ajoutés manuellement par admin.`);
-            orders.push({
-                player:details.payer.name.given_name || details.payer.email_address,
-                pack:p.name,
-                amount:p.price,
-                date:new Date().toLocaleString()
-            });
-            localStorage.setItem("epic_orders",JSON.stringify(orders));
-            renderOrders();
-            updateAdminStats();
+          alert(`Paiement confirmé pour ${p.name} !`);
         })
-    }).render(`#paypal-button-${p.id}`);
+      }).render(`#paypal-button-${p.id}`);
+    }
+  });
 }
+renderPacks();
 
-        div.querySelector(".buy-btn").addEventListener("click",()=>{
-            if(!canPay()) return;
-            alert("Utilise le bouton PayPal pour confirmer ton achat !");
-        });
-    });
-}
-renderPacks(); // <-- ici, les produits sont déjà affichés
-
-/* ===================== FILTRES BOUTIQUE ===================== */
+// ---------------- FILTRE AVEC BOUTON ACTIF ----------------
 const filterButtons = document.querySelectorAll('.filter-btn');
-const productCards = document.querySelectorAll('.product');
 
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const category = button.getAttribute('data-category');
-        productCards.forEach(card => {
-            if (card.getAttribute('data-category') === category) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+filterButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    // Toggle actif
+    filterButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cat = btn.dataset.category;
+
+    document.querySelectorAll('.card.product').forEach(card=>{
+      if(cat === "All" || card.dataset.category === cat){
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
     });
+  });
 });
-
-/* ===================== ADMIN ===================== */
-function openAdmin(){document.getElementById("adminLogin").style.display="flex";}
-function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
-async function checkLogin(){
-    const username=document.getElementById("adminUser").value;
-    const password=document.getElementById("adminPassword").value;
-    const hash=await sha256(password);
-    const account=ADMIN_ACCOUNTS.find(a=>a.username===username && a.password===hash);
-    if(!account){document.getElementById("loginError").textContent="Identifiants invalides"; return;}
-    currentAdmin=account;
-    document.getElementById("adminLogin").style.display="none";
-    document.getElementById("adminPanel").style.display="flex";
-    renderOrders();
-    updateAdminStats();
-}
-function addCoinsManually(){
-    const player=prompt("Nom du joueur:");
-    const coins=prompt("Nombre de coins à ajouter:");
-    alert(`Coins ajoutés à ${player}: ${coins}`);
-}
-
-/* ===================== HISTORIQUE ===================== */
-function renderOrders(){
-    const table=document.getElementById("ordersTable");
-    if(!table) return;
-    table.innerHTML="";
-    orders.forEach(o=>{
-        const row=document.createElement("tr");
-        row.innerHTML=`<td>${o.player}</td><td>${o.pack}</td><td>${o.amount} €</td><td>${o.date}</td>`;
-        table.appendChild(row);
-    });
-}
-function updateAdminStats(){
-    const totalRevenue=orders.reduce((sum,o)=>sum+parseFloat(o.amount),0);
-    document.getElementById("adminRevenue").textContent=totalRevenue.toFixed(2)+" €";
-    document.getElementById("adminOrders").textContent=orders.length;
-}
-
-/* ===================== LOADER ===================== */
-window.addEventListener("load",()=>document.getElementById("loader").style.display="none");
-
-/* ===================== SCROLL PACKS ===================== */
-function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
-
-
-
-
-
-
-
-
-
-
-
-
