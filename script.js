@@ -66,7 +66,7 @@ const products = [
   {id:39,name:"Pack Event Silver",coins:1000,role:"Donateur",price:9.99, category:"Pack"},
   {id:40,name:"Pack Event Gold",coins:2500,role:"Premium",price:19.99, category:"Pack"},
   {id:41,name:"Pack Event Diamond",coins:6000,role:"Diamond",price:39.99, category:"Pack"},
-  {id:42,name:"Ticket tournoi",coins:0,role:"Donateur",price:14.99, category:"Ticket"},
+  {id:42,name:"Ticket tournoi",coins:0,role:"Donateur",price:14.99, category:"Pack"},
 
   {id:43,name:"Soutien 2€",coins:100,role:"Supporter",price:2, category:"Soutien"},
   {id:44,name:"Soutien 5€",coins:300,role:"Donateur",price:5, category:"Soutien"},
@@ -208,6 +208,7 @@ window.addEventListener("load",()=>document.getElementById("loader").style.displ
 
 /* ===================== SCROLL PACKS ===================== */
 function scrollToPacks(){document.getElementById("packs").scrollIntoView({behavior:"smooth"});}
+
 
 
 
